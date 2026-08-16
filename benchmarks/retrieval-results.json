@@ -1,0 +1,1521 @@
+{
+  "generated_at": "2026-08-16T18:14:39.408431+00:00",
+  "cases_file": "retrieval.json",
+  "cases": 60,
+  "positive_cases": 55,
+  "negative_cases": 5,
+  "top_k": 3,
+  "hit_rate_at_k": 1.0,
+  "top_1_accuracy": 0.8,
+  "mean_reciprocal_rank": 0.8878787878787879,
+  "ndcg_at_k": 0.7870005562861974,
+  "citation_field_completeness": 1.0,
+  "no_answer_accuracy": 1.0,
+  "tag_counts": {
+    "acronym": 12,
+    "annex": 4,
+    "architecture": 3,
+    "assurance": 3,
+    "comparison": 1,
+    "conditional": 1,
+    "cross-standard": 4,
+    "definition": 9,
+    "design": 1,
+    "document": 7,
+    "equation": 1,
+    "error-handling": 1,
+    "exact-id": 3,
+    "exact-section": 1,
+    "exact-term": 1,
+    "explanation": 2,
+    "interface": 4,
+    "list": 1,
+    "multi-passage": 1,
+    "negative": 5,
+    "no-answer": 5,
+    "numeric": 3,
+    "procedure": 4,
+    "process": 2,
+    "reference": 2,
+    "requirement": 22,
+    "service": 2,
+    "services": 1,
+    "structure": 7,
+    "table": 1,
+    "terminology": 4,
+    "testing": 1,
+    "traceability": 1,
+    "validation": 1,
+    "verification": 2
+  },
+  "quality_gates": {
+    "hit_rate_at_k": true,
+    "top_1_accuracy": true,
+    "mean_reciprocal_rank": true,
+    "ndcg_at_k": true,
+    "citation_field_completeness": true,
+    "no_answer_accuracy": true
+  },
+  "passed": true,
+  "results": [
+    {
+      "case_id": "ccsds-asm-definition",
+      "question": "In CCSDS 131.0-B-6, what is an attached sync marker?",
+      "tags": [
+        "definition",
+        "acronym"
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "ndcg": 0.3373519727104165,
+      "relevance_grades": [
+        2,
+        0,
+        0
+      ],
+      "returned": [
+        "CCSDS 131.0-B-6 rev 6 p.70",
+        "CCSDS 132.0-B-3 rev 3 p.62",
+        "CCSDS 131.0-B-6 rev 6 p.88"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ccsds-aos-vc-count-cycle",
+      "question": "How is the virtual channel frame count cycle incremented?",
+      "tags": [
+        "requirement",
+        "procedure"
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "ndcg": 1.0,
+      "relevance_grades": [
+        3,
+        0,
+        0
+      ],
+      "returned": [
+        "CCSDS 732.0-B-5 rev 5 p.60",
+        "CCSDS 132.0-B-3 rev 3 p.63",
+        "CCSDS 732.0-B-5 rev 5 p.60"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ccsds-space-packet-primary-header",
+      "question": "What fields are in the space packet primary header?",
+      "tags": [
+        "structure",
+        "multi-passage"
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "ndcg": 0.4692787260227565,
+      "relevance_grades": [
+        3,
+        0,
+        0
+      ],
+      "returned": [
+        "CCSDS 133.0-B-2 rev 2 p.33",
+        "CCSDS 232.0-B-4 rev 4 p.93",
+        "CCSDS 133.0-B-2 rev 2 p.31"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ccsds-tm-tc-distinction",
+      "question": "How are TM transfer frames distinguished from TC transfer frames?",
+      "tags": [
+        "comparison",
+        "acronym"
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "ndcg": 1.0,
+      "relevance_grades": [
+        3,
+        0,
+        0
+      ],
+      "returned": [
+        "CCSDS 132.0-B-3 rev 3 p.62",
+        "CCSDS 232.0-B-4 rev 4 p.81",
+        "CCSDS 232.0-B-4 rev 4 p.35"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ccsds-tc-frame-version",
+      "question": "What identifies the TC transfer frame version number?",
+      "tags": [
+        "structure",
+        "acronym"
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "ndcg": 1.0,
+      "relevance_grades": [
+        3,
+        0,
+        0
+      ],
+      "returned": [
+        "CCSDS 232.0-B-4 rev 4 p.70",
+        "CCSDS 132.0-B-3 rev 3 p.110",
+        "CCSDS 232.0-B-4 rev 4 p.135"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ccsds-cltu-start-sequence",
+      "question": "What is the communications link transmission unit start sequence?",
+      "tags": [
+        "structure",
+        "terminology"
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "ndcg": 1.0,
+      "relevance_grades": [
+        3,
+        0,
+        0
+      ],
+      "returned": [
+        "CCSDS 231.0-B-4 rev 4 p.29",
+        "CCSDS 132.0-B-3 rev 3 p.62",
+        "CCSDS 231.0-B-4 rev 4 p.19"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ccsds-packet-sequence-count",
+      "question": "What does the packet sequence count identify?",
+      "tags": [
+        "definition",
+        "structure"
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "ndcg": 1.0,
+      "relevance_grades": [
+        3,
+        0,
+        0
+      ],
+      "returned": [
+        "CCSDS 133.0-B-2 rev 2 p.35",
+        "CCSDS 732.0-B-5 rev 5 p.58",
+        "CCSDS 133.0-B-2 rev 2 p.35"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ccsds-tm-pseudo-randomization",
+      "question": "How does pseudo-randomization work for TM channel coding?",
+      "tags": [
+        "procedure",
+        "terminology"
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "ndcg": 1.0,
+      "relevance_grades": [
+        3,
+        0,
+        0
+      ],
+      "returned": [
+        "CCSDS 131.0-B-6 rev 6 p.69",
+        "CCSDS 231.0-B-4 rev 4 p.14",
+        "CCSDS 131.0-B-6 rev 6 p.54"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ccsds-aos-mcid",
+      "question": "What does the AOS master channel identifier contain?",
+      "tags": [
+        "cross-standard",
+        "acronym"
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "ndcg": 1.0,
+      "relevance_grades": [
+        3,
+        2,
+        0
+      ],
+      "returned": [
+        "CCSDS 732.0-B-5 rev 5 p.48",
+        "CCSDS 132.0-B-3 rev 3 p.62",
+        "CCSDS 732.0-B-5 rev 5 p.56"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ccsds-tm-frame-error-control",
+      "question": "When is the frame error control field present in a TM transfer frame?",
+      "tags": [
+        "requirement",
+        "acronym"
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "ndcg": 1.0,
+      "relevance_grades": [
+        3,
+        0,
+        0
+      ],
+      "returned": [
+        "CCSDS 132.0-B-3 rev 3 p.87",
+        "CCSDS 732.0-B-5 rev 5 p.85",
+        "CCSDS 132.0-B-3 rev 3 p.88"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ecss-vcd-requirements",
+      "question": "What is required for a verification control document?",
+      "tags": [
+        "requirement",
+        "document"
+      ],
+      "first_relevant_rank": 2,
+      "reciprocal_rank": 0.5,
+      "ndcg": 0.2128453970090281,
+      "relevance_grades": [
+        0,
+        2,
+        0
+      ],
+      "returned": [
+        "ECSS-E-ST-10C rev 1 p.14",
+        "ECSS-E-ST-10-02C rev 1 p.22",
+        "ECSS-E-ST-10-02C rev 1 p.21"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ecss-verification-methods",
+      "question": "Which verification methods can be selected?",
+      "tags": [
+        "requirement",
+        "cross-standard"
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "ndcg": 0.08391719931063304,
+      "relevance_grades": [
+        1,
+        0,
+        0
+      ],
+      "returned": [
+        "ECSS-E-ST-10C rev 1 p.101",
+        "ECSS-E-ST-10-02C rev 1 p.13",
+        "ECSS-E-ST-10C rev 1 p.27"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ecss-idd-definition",
+      "question": "What information is recorded in an interface identification document?",
+      "tags": [
+        "definition",
+        "document"
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "ndcg": 1.0,
+      "relevance_grades": [
+        3,
+        0,
+        0
+      ],
+      "returned": [
+        "ECSS-E-ST-10-24C rev 1 p.10",
+        "ECSS-E-ST-40C rev 1 p.116",
+        "ECSS-E-ST-10-24C rev 1 p.50"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ecss-interface-requirements",
+      "question": "What interface requirements must the customer define in the IRD?",
+      "tags": [
+        "requirement",
+        "document"
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "ndcg": 0.6403662530558959,
+      "relevance_grades": [
+        3,
+        1,
+        0
+      ],
+      "returned": [
+        "ECSS-E-ST-10-24C rev 1 p.25",
+        "ECSS-E-ST-40C rev 1 p.40",
+        "ECSS-E-ST-40C rev 1 p.39"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ecss-sep-content",
+      "question": "What belongs in a system engineering plan?",
+      "tags": [
+        "annex",
+        "document"
+      ],
+      "first_relevant_rank": 2,
+      "reciprocal_rank": 0.5,
+      "ndcg": 0.32645608177002144,
+      "relevance_grades": [
+        0,
+        2,
+        2
+      ],
+      "returned": [
+        "ECSS-E-ST-10C rev 1 p.5",
+        "ECSS-E-ST-10C rev 1 p.25",
+        "ECSS-E-ST-10C rev 1 p.24"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ecss-technical-budgets",
+      "question": "What does the system engineering function do with technical budgets and margin policy?",
+      "tags": [
+        "requirement",
+        "procedure"
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "ndcg": 1.0,
+      "relevance_grades": [
+        3,
+        0,
+        0
+      ],
+      "returned": [
+        "ECSS-E-ST-10C rev 1 p.31",
+        "ECSS-E-ST-40C rev 1 p.27",
+        "ECSS-E-ST-10C rev 1 p.6"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ecss-software-lifecycle-processes",
+      "question": "Which software life cycle processes are required?",
+      "tags": [
+        "structure",
+        "process"
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "ndcg": 1.0,
+      "relevance_grades": [
+        3,
+        0,
+        0
+      ],
+      "returned": [
+        "ECSS-E-ST-40C rev 1 p.24",
+        "ECSS-Q-ST-80C rev 2 p.21",
+        "ECSS-E-ST-40C rev 1 p.26"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ecss-srs-content",
+      "question": "What belongs in the software requirements specification?",
+      "tags": [
+        "annex",
+        "document",
+        "cross-standard"
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "ndcg": 0.14433083962070967,
+      "relevance_grades": [
+        1,
+        0,
+        1
+      ],
+      "returned": [
+        "ECSS-E-ST-40C rev 1 p.96",
+        "ECSS-Q-ST-80C rev 2 p.118",
+        "ECSS-E-ST-40C rev 1 p.95"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ecss-software-criticality",
+      "question": "What are the software criticality categories?",
+      "tags": [
+        "annex",
+        "table",
+        "cross-standard"
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "ndcg": 0.47078692139073114,
+      "relevance_grades": [
+        2,
+        2,
+        0
+      ],
+      "returned": [
+        "ECSS-E-ST-40C rev 1 p.14",
+        "ECSS-Q-ST-80C rev 2 p.13",
+        "ECSS-Q-ST-80C rev 2 p.102"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ecss-assurance-verification-report",
+      "question": "What summary of verification assurance activities and findings must the reports include?",
+      "tags": [
+        "requirement",
+        "assurance"
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "ndcg": 1.0,
+      "relevance_grades": [
+        3,
+        0,
+        0
+      ],
+      "returned": [
+        "ECSS-Q-ST-80C rev 2 p.51",
+        "ECSS-E-ST-40C rev 1 p.167",
+        "ECSS-Q-ST-80C rev 2 p.99"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ccsds-131-architecture",
+      "question": "How does CCSDS 131.0-B-6 relate synchronization and coding to the OSI model?",
+      "tags": [
+        "exact-id",
+        "architecture"
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "ndcg": 1.0,
+      "relevance_grades": [
+        3,
+        0,
+        0
+      ],
+      "returned": [
+        "CCSDS 131.0-B-6 rev 6 p.20",
+        "CCSDS 231.0-B-4 rev 4 p.16",
+        "CCSDS 131.0-B-6 rev 6 p.19"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ccsds-rs-polynomial",
+      "question": "Where is the Reed-Solomon code generator polynomial specified?",
+      "tags": [
+        "equation",
+        "exact-section"
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "ndcg": 1.0,
+      "relevance_grades": [
+        3,
+        0,
+        0
+      ],
+      "returned": [
+        "CCSDS 131.0-B-6 rev 6 p.36",
+        "CCSDS 732.0-B-5 rev 5 p.61",
+        "CCSDS 131.0-B-6 rev 6 p.77"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ccsds-turbo-code-purpose",
+      "question": "Why are turbo codes used for telemetry channel coding?",
+      "tags": [
+        "explanation",
+        "terminology"
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "ndcg": 1.0,
+      "relevance_grades": [
+        3,
+        0,
+        0
+      ],
+      "returned": [
+        "CCSDS 131.0-B-6 rev 6 p.44",
+        "CCSDS 231.0-B-4 rev 4 p.34",
+        "CCSDS 131.0-B-6 rev 6 p.51"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ccsds-sliced-frame-length",
+      "question": "What is the maximum transfer-frame length when slicing is used?",
+      "tags": [
+        "requirement",
+        "numeric"
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "ndcg": 1.0,
+      "relevance_grades": [
+        3,
+        0,
+        0
+      ],
+      "returned": [
+        "CCSDS 131.0-B-6 rev 6 p.74",
+        "CCSDS 133.0-B-2 rev 2 p.24",
+        "CCSDS 131.0-B-6 rev 6 p.73"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ccsds-tm-service-restrictions",
+      "question": "What restrictions apply to services on a TM physical channel?",
+      "tags": [
+        "requirement",
+        "services"
+      ],
+      "first_relevant_rank": 3,
+      "reciprocal_rank": 0.3333333333333333,
+      "ndcg": 0.5,
+      "relevance_grades": [
+        0,
+        0,
+        3
+      ],
+      "returned": [
+        "CCSDS 732.0-B-5 rev 5 p.32",
+        "CCSDS 132.0-B-3 rev 3 p.34",
+        "CCSDS 132.0-B-3 rev 3 p.27"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ccsds-tm-vcid",
+      "question": "What does the TM virtual channel identifier identify?",
+      "tags": [
+        "definition",
+        "acronym"
+      ],
+      "first_relevant_rank": 3,
+      "reciprocal_rank": 0.3333333333333333,
+      "ndcg": 0.5,
+      "relevance_grades": [
+        0,
+        0,
+        3
+      ],
+      "returned": [
+        "CCSDS 132.0-B-3 rev 3 p.62",
+        "CCSDS 232.0-B-4 rev 4 p.73",
+        "CCSDS 132.0-B-3 rev 3 p.63"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ccsds-invalid-vcid",
+      "question": "What happens to a received TM frame with an invalid VCID?",
+      "tags": [
+        "requirement",
+        "error-handling"
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "ndcg": 1.0,
+      "relevance_grades": [
+        3,
+        0,
+        0
+      ],
+      "returned": [
+        "CCSDS 132.0-B-3 rev 3 p.84",
+        "CCSDS 232.0-B-4 rev 4 p.118",
+        "CCSDS 132.0-B-3 rev 3 p.107"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ccsds-spp-description",
+      "question": "In what terms is the Space Packet Protocol described?",
+      "tags": [
+        "architecture",
+        "terminology"
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "ndcg": 1.0,
+      "relevance_grades": [
+        3,
+        0,
+        0
+      ],
+      "returned": [
+        "CCSDS 133.0-B-2 rev 2 p.19",
+        "CCSDS 232.0-B-4 rev 4 p.20",
+        "CCSDS 133.0-B-2 rev 2 p.12"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ccsds-space-packet-size",
+      "question": "What are the minimum and maximum sizes of a Space Packet?",
+      "tags": [
+        "requirement",
+        "numeric"
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "ndcg": 0.3373519727104165,
+      "relevance_grades": [
+        2,
+        0,
+        0
+      ],
+      "returned": [
+        "CCSDS 133.0-B-2 rev 2 p.24",
+        "CCSDS 232.0-B-4 rev 4 p.91",
+        "CCSDS 133.0-B-2 rev 2 p.24"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ccsds-secondary-header-mandatory",
+      "question": "When is the Space Packet secondary header mandatory?",
+      "tags": [
+        "requirement",
+        "conditional"
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "ndcg": 1.0,
+      "relevance_grades": [
+        3,
+        0,
+        0
+      ],
+      "returned": [
+        "CCSDS 133.0-B-2 rev 2 p.36",
+        "CCSDS 132.0-B-3 rev 3 p.64",
+        "CCSDS 133.0-B-2 rev 2 p.38"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ccsds-tc-randomizer-purpose",
+      "question": "Why is the optional TC randomizer used?",
+      "tags": [
+        "explanation",
+        "acronym"
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "ndcg": 1.0,
+      "relevance_grades": [
+        3,
+        0,
+        0
+      ],
+      "returned": [
+        "CCSDS 231.0-B-4 rev 4 p.19",
+        "CCSDS 232.0-B-4 rev 4 p.38",
+        "CCSDS 231.0-B-4 rev 4 p.36"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ccsds-bch-codeword",
+      "question": "How many information and parity bits are used in the TC BCH codeword?",
+      "tags": [
+        "requirement",
+        "numeric",
+        "acronym"
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "ndcg": 1.0,
+      "relevance_grades": [
+        3,
+        0,
+        0
+      ],
+      "returned": [
+        "CCSDS 231.0-B-4 rev 4 p.23",
+        "CCSDS 131.0-B-6 rev 6 p.17",
+        "CCSDS 231.0-B-4 rev 4 p.23"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ccsds-cltu-structure",
+      "question": "What data structure carries encoded TC codewords across the coding sublayer?",
+      "tags": [
+        "definition",
+        "structure"
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "ndcg": 1.0,
+      "relevance_grades": [
+        3,
+        0,
+        0
+      ],
+      "returned": [
+        "CCSDS 231.0-B-4 rev 4 p.29",
+        "CCSDS 231.0-B-4 rev 4 p.15",
+        "CCSDS 231.0-B-4 rev 4 p.14"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ccsds-tc-frame-parameter",
+      "question": "What do the Frame and GVCID parameters represent in the TC virtual-channel frame service?",
+      "tags": [
+        "service",
+        "acronym"
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "ndcg": 0.3373519727104165,
+      "relevance_grades": [
+        2,
+        0,
+        0
+      ],
+      "returned": [
+        "CCSDS 232.0-B-4 rev 4 p.58",
+        "CCSDS 232.0-B-4 rev 4 p.129",
+        "CCSDS 232.0-B-4 rev 4 p.128"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ccsds-tc-segment-header",
+      "question": "In CCSDS 232.0-B-4, which fields are contained in the TC segment header?",
+      "tags": [
+        "structure",
+        "requirement"
+      ],
+      "first_relevant_rank": 3,
+      "reciprocal_rank": 0.3333333333333333,
+      "ndcg": 0.5,
+      "relevance_grades": [
+        0,
+        0,
+        3
+      ],
+      "returned": [
+        "CCSDS 232.0-B-4 rev 4 p.114",
+        "CCSDS 232.0-B-4 rev 4 p.114",
+        "CCSDS 232.0-B-4 rev 4 p.75"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ccsds-aos-general-functions",
+      "question": "What kinds of service data units does the AOS protocol transfer?",
+      "tags": [
+        "architecture",
+        "acronym"
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "ndcg": 0.432992518862129,
+      "relevance_grades": [
+        2,
+        0,
+        2
+      ],
+      "returned": [
+        "CCSDS 732.0-B-5 rev 5 p.63",
+        "CCSDS 132.0-B-3 rev 3 p.85",
+        "CCSDS 732.0-B-5 rev 5 p.31"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ccsds-aos-insert-request",
+      "question": "What is the AOS INSERT.request primitive used for?",
+      "tags": [
+        "service",
+        "exact-term"
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "ndcg": 1.0,
+      "relevance_grades": [
+        3,
+        0,
+        0
+      ],
+      "returned": [
+        "CCSDS 732.0-B-5 rev 5 p.52",
+        "CCSDS 732.0-B-5 rev 5 p.52",
+        "CCSDS 732.0-B-5 rev 5 p.52"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ccsds-aos-bitstream-processing",
+      "question": "How does AOS bitstream processing carry variable-length bit streams?",
+      "tags": [
+        "procedure",
+        "acronym"
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "ndcg": 1.0,
+      "relevance_grades": [
+        3
+      ],
+      "returned": [
+        "CCSDS 732.0-B-5 rev 5 p.74"
+      ],
+      "complete_citations": 1,
+      "returned_hits": 1,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ecss-review-of-design",
+      "question": "What is the review-of-design verification method?",
+      "tags": [
+        "definition",
+        "verification"
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "ndcg": 1.0,
+      "relevance_grades": [
+        3,
+        0,
+        0
+      ],
+      "returned": [
+        "ECSS-E-ST-10-02C rev 1 p.8",
+        "ECSS-E-ST-10-24C rev 1 p.28",
+        "ECSS-E-ST-10-02C rev 1 p.45"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ecss-verification-method-list",
+      "question": "Which four verification methods does ECSS-E-ST-10-02C list?",
+      "tags": [
+        "exact-id",
+        "list"
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "ndcg": 1.0,
+      "relevance_grades": [
+        3,
+        0,
+        0
+      ],
+      "returned": [
+        "ECSS-E-ST-10-02C rev 1 p.12",
+        "ECSS-E-ST-10-02C rev 1 p.14",
+        "ECSS-E-ST-10-02C rev 1 p.48"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ecss-analysis-tools",
+      "question": "How are software tools controlled when verification is performed by analysis?",
+      "tags": [
+        "requirement",
+        "verification"
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "ndcg": 1.0,
+      "relevance_grades": [
+        3,
+        0,
+        0
+      ],
+      "returned": [
+        "ECSS-E-ST-10-02C rev 1 p.20",
+        "ECSS-E-ST-10C rev 1 p.115",
+        "ECSS-E-ST-40C rev 1 p.70"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ecss-completed-vcd",
+      "question": "What must the completed VCD conform to?",
+      "tags": [
+        "requirement",
+        "acronym"
+      ],
+      "first_relevant_rank": 2,
+      "reciprocal_rank": 0.5,
+      "ndcg": 0.6309297535714575,
+      "relevance_grades": [
+        0,
+        3,
+        0
+      ],
+      "returned": [
+        "ECSS-E-ST-10C rev 1 p.26",
+        "ECSS-E-ST-10-02C rev 1 p.26",
+        "ECSS-E-ST-10-02C rev 1 p.13"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ecss-internal-interface",
+      "question": "How does ECSS-E-ST-10-24C define an internal interface?",
+      "tags": [
+        "definition",
+        "interface"
+      ],
+      "first_relevant_rank": 2,
+      "reciprocal_rank": 0.5,
+      "ndcg": 0.6309297535714575,
+      "relevance_grades": [
+        0,
+        3,
+        0
+      ],
+      "returned": [
+        "ECSS-E-ST-10-24C rev 1 p.24",
+        "ECSS-E-ST-10-24C rev 1 p.10",
+        "ECSS-E-ST-10-24C rev 1 p.11"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ecss-interface-requirement-process",
+      "question": "Which engineering process establishes interface requirements?",
+      "tags": [
+        "process",
+        "interface"
+      ],
+      "first_relevant_rank": 2,
+      "reciprocal_rank": 0.5,
+      "ndcg": 0.6309297535714575,
+      "relevance_grades": [
+        0,
+        3,
+        0
+      ],
+      "returned": [
+        "ECSS-E-ST-40C rev 1 p.28",
+        "ECSS-E-ST-10-24C rev 1 p.15",
+        "ECSS-E-ST-40C rev 1 p.6"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ecss-icd-modifications",
+      "question": "Under ECSS-E-ST-10-24C, how must modifications to an interface control document be managed?",
+      "tags": [
+        "requirement",
+        "interface"
+      ],
+      "first_relevant_rank": 2,
+      "reciprocal_rank": 0.5,
+      "ndcg": 0.6309297535714575,
+      "relevance_grades": [
+        0,
+        3,
+        0
+      ],
+      "returned": [
+        "ECSS-E-ST-10-24C rev 1 p.41",
+        "ECSS-E-ST-10-24C rev 1 p.27",
+        "ECSS-E-ST-10-24C rev 1 p.17"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ecss-idd-purpose",
+      "question": "What purpose and content must an IDD describe?",
+      "tags": [
+        "annex",
+        "document"
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "ndcg": 1.0,
+      "relevance_grades": [
+        3,
+        0,
+        0
+      ],
+      "returned": [
+        "ECSS-E-ST-10-24C rev 1 p.48",
+        "ECSS-E-ST-40C rev 1 p.194",
+        "ECSS-E-ST-10-24C rev 1 p.50"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ecss-requirement-traceability",
+      "question": "What forward and backward requirement traceability must system engineering maintain?",
+      "tags": [
+        "requirement",
+        "traceability"
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "ndcg": 1.0,
+      "relevance_grades": [
+        3,
+        0,
+        0
+      ],
+      "returned": [
+        "ECSS-E-ST-10C rev 1 p.25",
+        "ECSS-E-ST-40C rev 1 p.126",
+        "ECSS-E-ST-10C rev 1 p.26"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ecss-system-design",
+      "question": "From which inputs must the system engineering function establish the system design?",
+      "tags": [
+        "requirement",
+        "design"
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "ndcg": 1.0,
+      "relevance_grades": [
+        3,
+        0,
+        0
+      ],
+      "returned": [
+        "ECSS-E-ST-10C rev 1 p.31",
+        "ECSS-E-ST-40C rev 1 p.249",
+        "ECSS-E-ST-10C rev 1 p.29"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ecss-interface-control",
+      "question": "Which ECSS standard controls external and internal interfaces?",
+      "tags": [
+        "reference",
+        "interface"
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "ndcg": 1.0,
+      "relevance_grades": [
+        3,
+        0,
+        0
+      ],
+      "returned": [
+        "ECSS-E-ST-10C rev 1 p.35",
+        "ECSS-E-ST-10-24C rev 1 p.7",
+        "ECSS-E-ST-10C rev 1 p.113"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ecss-unreachable-code",
+      "question": "How does ECSS-E-ST-40C define unreachable code?",
+      "tags": [
+        "exact-id",
+        "definition"
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "ndcg": 1.0,
+      "relevance_grades": [
+        3,
+        0,
+        0
+      ],
+      "returned": [
+        "ECSS-E-ST-40C rev 1 p.19",
+        "ECSS-E-ST-40C rev 1 p.44",
+        "ECSS-E-ST-40C rev 1 p.127"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ecss-software-validation-input",
+      "question": "What system input must be specified for software validation?",
+      "tags": [
+        "requirement",
+        "validation"
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "ndcg": 1.0,
+      "relevance_grades": [
+        3,
+        0,
+        0
+      ],
+      "returned": [
+        "ECSS-E-ST-40C rev 1 p.38",
+        "ECSS-Q-ST-80C rev 2 p.23",
+        "ECSS-E-ST-40C rev 1 p.38"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ecss-software-operational-testing",
+      "question": "Which procedures must be established for operational software testing?",
+      "tags": [
+        "requirement",
+        "testing"
+      ],
+      "first_relevant_rank": 2,
+      "reciprocal_rank": 0.5,
+      "ndcg": 0.6309297535714575,
+      "relevance_grades": [
+        0,
+        3,
+        0
+      ],
+      "returned": [
+        "ECSS-Q-ST-80C rev 2 p.49",
+        "ECSS-E-ST-40C rev 1 p.80",
+        "ECSS-E-ST-40C rev 1 p.81"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ecss-spa-definition",
+      "question": "What does software product assurance mean?",
+      "tags": [
+        "definition",
+        "assurance"
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "ndcg": 0.3373519727104165,
+      "relevance_grades": [
+        2,
+        0,
+        0
+      ],
+      "returned": [
+        "ECSS-Q-ST-80C rev 2 p.22",
+        "ECSS-Q-ST-80C rev 2 p.103",
+        "ECSS-Q-ST-80C rev 2 p.25"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ecss-software-alerts",
+      "question": "Which ECSS clause applies to software alerts?",
+      "tags": [
+        "reference",
+        "assurance"
+      ],
+      "first_relevant_rank": 3,
+      "reciprocal_rank": 0.3333333333333333,
+      "ndcg": 0.5,
+      "relevance_grades": [
+        0,
+        0,
+        3
+      ],
+      "returned": [
+        "ECSS-Q-ST-80C rev 2 p.28",
+        "ECSS-E-ST-40C rev 1 p.53",
+        "ECSS-Q-ST-80C rev 2 p.28"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "ecss-spa-plan-output",
+      "question": "What is the expected SPAP output of the software product assurance process?",
+      "tags": [
+        "requirement",
+        "document"
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "ndcg": 1.0,
+      "relevance_grades": [
+        3,
+        0,
+        0
+      ],
+      "returned": [
+        "ECSS-Q-ST-80C rev 2 p.50",
+        "ECSS-E-ST-40C rev 1 p.62",
+        "ECSS-Q-ST-80C rev 2 p.50"
+      ],
+      "complete_citations": 3,
+      "returned_hits": 3,
+      "expected_no_answer": false,
+      "no_answer_correct": false
+    },
+    {
+      "case_id": "negative-ccsds-nutrition",
+      "question": "What astronaut nutrition requirements are specified?",
+      "tags": [
+        "no-answer",
+        "negative"
+      ],
+      "first_relevant_rank": null,
+      "reciprocal_rank": 0.0,
+      "ndcg": 0.0,
+      "relevance_grades": [],
+      "returned": [],
+      "complete_citations": 0,
+      "returned_hits": 0,
+      "expected_no_answer": true,
+      "no_answer_correct": true
+    },
+    {
+      "case_id": "negative-ccsds-rover-wheels",
+      "question": "How should lunar rover wheels be designed?",
+      "tags": [
+        "no-answer",
+        "negative"
+      ],
+      "first_relevant_rank": null,
+      "reciprocal_rank": 0.0,
+      "ndcg": 0.0,
+      "relevance_grades": [],
+      "returned": [],
+      "complete_citations": 0,
+      "returned_hits": 0,
+      "expected_no_answer": true,
+      "no_answer_correct": true
+    },
+    {
+      "case_id": "negative-ccsds-cabin-oxygen",
+      "question": "What cabin oxygen limits apply to a human-rated spacecraft?",
+      "tags": [
+        "no-answer",
+        "negative"
+      ],
+      "first_relevant_rank": null,
+      "reciprocal_rank": 0.0,
+      "ndcg": 0.0,
+      "relevance_grades": [],
+      "returned": [],
+      "complete_citations": 0,
+      "returned_hits": 0,
+      "expected_no_answer": true,
+      "no_answer_correct": true
+    },
+    {
+      "case_id": "negative-ecss-tank-welding",
+      "question": "Which welding procedure applies to a launch vehicle propellant tank?",
+      "tags": [
+        "no-answer",
+        "negative"
+      ],
+      "first_relevant_rank": null,
+      "reciprocal_rank": 0.0,
+      "ndcg": 0.0,
+      "relevance_grades": [],
+      "returned": [],
+      "complete_citations": 0,
+      "returned_hits": 0,
+      "expected_no_answer": true,
+      "no_answer_correct": true
+    },
+    {
+      "case_id": "negative-ecss-solar-cells",
+      "question": "What radiation hardness test applies to photovoltaic solar cells?",
+      "tags": [
+        "no-answer",
+        "negative"
+      ],
+      "first_relevant_rank": null,
+      "reciprocal_rank": 0.0,
+      "ndcg": 0.0,
+      "relevance_grades": [],
+      "returned": [],
+      "complete_citations": 0,
+      "returned_hits": 0,
+      "expected_no_answer": true,
+      "no_answer_correct": true
+    }
+  ]
+}
