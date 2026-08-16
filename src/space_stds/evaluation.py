@@ -189,7 +189,11 @@ def _parse_relevant(value: object, case_index: int) -> RelevantPassage:
         raise ValueError(f"Benchmark case {case_index} relevant page must be positive")
     if item["section_prefix"] is not None and not isinstance(item["section_prefix"], str):
         raise ValueError(f"Benchmark case {case_index} section_prefix must be a string or null")
-    if isinstance(item["relevance"], bool) or item["relevance"] not in {1, 2, 3}:
+    if (
+        isinstance(item["relevance"], bool)
+        or not isinstance(item["relevance"], int)
+        or item["relevance"] not in {1, 2, 3}
+    ):
         raise ValueError(f"Benchmark case {case_index} relevance must be 1, 2, or 3")
     return RelevantPassage(
         document_id=_nonempty_string(

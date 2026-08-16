@@ -138,6 +138,19 @@ def test_benchmark_rejects_booleans_for_numeric_fields(tmp_path: Path, field: st
         load_cases(path)
 
 
+@pytest.mark.parametrize("invalid_relevance", [[1], {"grade": 3}, "3", 3.0])
+def test_benchmark_rejects_non_integer_relevance_values(
+    tmp_path: Path, invalid_relevance: object
+) -> None:
+    case = _raw_case()
+    case["relevant"][0]["relevance"] = invalid_relevance
+    path = tmp_path / "cases.json"
+    path.write_text(json.dumps([case]))
+
+    with pytest.raises(ValueError, match="relevance"):
+        load_cases(path)
+
+
 def _raw_case() -> dict[str, Any]:
     return {
         "id": "valid-case",

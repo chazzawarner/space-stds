@@ -124,3 +124,33 @@ def test_manifest_rejects_parent_directory_segments(tmp_path: Path) -> None:
 
     with pytest.raises(InvalidSourceError, match="parent-directory"):
         load_manifest(manifest, corpus)
+
+
+def test_manifest_rejects_symlink_target_outside_corpus_root(tmp_path: Path) -> None:
+    corpus = tmp_path / "corpus"
+    corpus.mkdir()
+    outside = tmp_path / "outside.pdf"
+    outside.write_bytes(b"%PDF-synthetic")
+    (corpus / "linked.pdf").symlink_to(outside)
+    manifest = tmp_path / "manifest.json"
+    manifest.write_text(
+        json.dumps(
+            {
+                "schema_version": 1,
+                "documents": [
+                    {
+                        "source": "CCSDS",
+                        "document_id": "CCSDS 100.0-B-1",
+                        "title": "Symlink escape",
+                        "revision": "1",
+                        "status": "active",
+                        "official_url": "https://ccsds.org/example.pdf",
+                        "file": "linked.pdf",
+                    }
+                ],
+            }
+        )
+    )
+
+    with pytest.raises(InvalidSourceError, match="inside the corpus root"):
+        load_manifest(manifest, corpus)
