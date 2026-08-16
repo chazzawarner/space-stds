@@ -54,6 +54,24 @@ def test_user_can_discover_ccsds_publications_and_filter_book_types() -> None:
     assert publications[0].url == "https://ccsds.org/files/131x0b6.pdf"
 
 
+def test_ccsds_catalogue_parser_tolerates_non_string_metadata_cells() -> None:
+    page = r"""
+    <script>
+    const config = {"data":[
+      ["","<a href=\"https:\/\/ccsds.org\/files\/131x0b6.pdf\">PDF<\/a>",
+       "<a href=\"\/publications\/ccsdsallpubs\/entry\/1\/\">CCSDS 131.0-B-6<\/a>",
+       131,"Blue Book",6,2026]
+    ]};
+    </script>
+    """
+
+    publications = discover_ccsds_publications(page)
+
+    assert publications[0].title == "131"
+    assert publications[0].revision == "6"
+    assert publications[0].published == "2026"
+
+
 def test_user_can_discover_only_supported_files_from_an_official_directory() -> None:
     page = """
     <a href="/ftp/ecss.nl/">Parent Directory</a>

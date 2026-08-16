@@ -6,6 +6,7 @@ from zipfile import ZipFile, ZipInfo
 
 import pytest
 
+from space_stds import corpus_setup
 from space_stds.acquisition import extract_pdf_archive
 from space_stds.corpus_setup import prepare_acquired_corpus
 from space_stds.domain import InvalidSourceError
@@ -54,7 +55,7 @@ def test_archive_directory_shaped_symbolic_link_is_rejected(tmp_path: Path) -> N
 
 
 def test_acquisition_manifest_can_prepare_archives_and_generate_ingestion_manifest(
-    tmp_path: Path,
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     corpus = tmp_path / "corpus"
     ccsds_dir = corpus / "ccsds"
@@ -106,6 +107,15 @@ def test_acquisition_manifest_can_prepare_archives_and_generate_ingestion_manife
         )
     )
     output = corpus / "ingestion-manifest.generated.json"
+    manifest_partials: list[Path] = []
+    replace = corpus_setup.os.replace
+
+    def track_manifest_publish(source: str | Path, destination: str | Path) -> None:
+        if Path(destination) == output:
+            manifest_partials.append(Path(source))
+        replace(source, destination)
+
+    monkeypatch.setattr(corpus_setup.os, "replace", track_manifest_publish)
 
     outcome = prepare_acquired_corpus(acquisition, corpus, output)
     generated = json.loads(output.read_text())
@@ -125,6 +135,8 @@ def test_acquisition_manifest_can_prepare_archives_and_generate_ingestion_manife
 
     second = prepare_acquired_corpus(acquisition, corpus, output)
     assert second == outcome
+    assert len(manifest_partials) == 2
+    assert manifest_partials[0] != manifest_partials[1]
 
     extracted_pdf = corpus / generated["documents"][1]["file"]
     extracted_pdf.write_bytes(b"%PDF-tampered")

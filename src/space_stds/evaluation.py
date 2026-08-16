@@ -12,6 +12,8 @@ from space_stds.domain import Corpus, SearchHit
 
 @dataclass(frozen=True, slots=True)
 class RelevantPassage:
+    """Define one graded passage label for a benchmark question."""
+
     document_id: str
     revision: str
     page: int
@@ -21,6 +23,8 @@ class RelevantPassage:
 
 @dataclass(frozen=True, slots=True)
 class BenchmarkCase:
+    """Define a source-scoped retrieval question and its relevance labels."""
+
     case_id: str
     question: str
     source: Corpus
@@ -30,6 +34,8 @@ class BenchmarkCase:
 
 @dataclass(frozen=True, slots=True)
 class CaseResult:
+    """Hold per-question ranking, citation, and no-answer measurements."""
+
     case_id: str
     question: str
     tags: tuple[str, ...]
@@ -45,11 +51,15 @@ class CaseResult:
 
     @property
     def citation_fields_complete(self) -> bool:
+        """Report whether every returned hit contains the required citation fields."""
+
         return self.returned_hits > 0 and self.complete_citations == self.returned_hits
 
 
 @dataclass(frozen=True, slots=True)
 class BenchmarkSummary:
+    """Aggregate retrieval and citation metrics across benchmark cases."""
+
     cases: int
     positive_cases: int
     negative_cases: int
@@ -64,6 +74,8 @@ class BenchmarkSummary:
 
 
 def evaluate_case(case: BenchmarkCase, hits: list[SearchHit]) -> CaseResult:
+    """Grade ordered search hits against one case without reusing relevance labels."""
+
     grades: list[int] = []
     used_labels: set[int] = set()
     for hit in hits:
@@ -99,6 +111,8 @@ def evaluate_case(case: BenchmarkCase, hits: list[SearchHit]) -> CaseResult:
 
 
 def summarise(results: list[CaseResult], *, top_k: int) -> BenchmarkSummary:
+    """Calculate aggregate ranking, citation, and no-answer metrics."""
+
     cases = len(results)
     positives = [result for result in results if not result.expected_no_answer]
     negatives = [result for result in results if result.expected_no_answer]
@@ -140,6 +154,8 @@ def summarise(results: list[CaseResult], *, top_k: int) -> BenchmarkSummary:
 
 
 def load_cases(path: Path) -> list[BenchmarkCase]:
+    """Load and validate a non-empty JSON benchmark case set."""
+
     payload = json.loads(path.read_text())
     if not isinstance(payload, list) or not payload:
         raise ValueError("Benchmark cases must be a non-empty list")
@@ -147,6 +163,8 @@ def load_cases(path: Path) -> list[BenchmarkCase]:
 
 
 def _parse_case(value: object, index: int) -> BenchmarkCase:
+    """Validate one benchmark case and reject contradictory no-answer labels."""
+
     if not isinstance(value, dict):
         raise ValueError(f"Benchmark case {index} must be an object")
     case = cast(dict[str, Any], value)
@@ -164,6 +182,8 @@ def _parse_case(value: object, index: int) -> BenchmarkCase:
         raise ValueError(f"Benchmark case {index} relevant must be a list")
     if not relevant and "no-answer" not in case["tags"]:
         raise ValueError(f"Benchmark case {index} needs relevant passages unless tagged no-answer")
+    if relevant and "no-answer" in case["tags"]:
+        raise ValueError(f"Benchmark case {index} cannot have relevant passages and no-answer")
     return BenchmarkCase(
         case_id=_nonempty_string(case["id"], f"Benchmark case {index} id"),
         question=_nonempty_string(case["question"], f"Benchmark case {index} question"),
@@ -174,6 +194,8 @@ def _parse_case(value: object, index: int) -> BenchmarkCase:
 
 
 def _parse_relevant(value: object, case_index: int) -> RelevantPassage:
+    """Validate one graded relevance label using strict JSON integer semantics."""
+
     if not isinstance(value, dict):
         raise ValueError(f"Benchmark case {case_index} relevant passage must be an object")
     item = cast(dict[str, Any], value)
@@ -183,11 +205,15 @@ def _parse_relevant(value: object, case_index: int) -> RelevantPassage:
             f"Benchmark case {case_index} relevant passage must contain exactly: "
             f"{', '.join(sorted(required))}"
         )
-    if not isinstance(item["page"], int) or item["page"] < 1:
+    if isinstance(item["page"], bool) or not isinstance(item["page"], int) or item["page"] < 1:
         raise ValueError(f"Benchmark case {case_index} relevant page must be positive")
     if item["section_prefix"] is not None and not isinstance(item["section_prefix"], str):
         raise ValueError(f"Benchmark case {case_index} section_prefix must be a string or null")
-    if item["relevance"] not in {1, 2, 3}:
+    if (
+        isinstance(item["relevance"], bool)
+        or not isinstance(item["relevance"], int)
+        or item["relevance"] not in {1, 2, 3}
+    ):
         raise ValueError(f"Benchmark case {case_index} relevance must be 1, 2, or 3")
     return RelevantPassage(
         document_id=_nonempty_string(
@@ -201,12 +227,16 @@ def _parse_relevant(value: object, case_index: int) -> RelevantPassage:
 
 
 def _nonempty_string(value: object, field: str) -> str:
+    """Return stripped text or raise a field-specific validation error."""
+
     if not isinstance(value, str) or not value.strip():
         raise ValueError(f"{field} must be a non-empty string")
     return value.strip()
 
 
 def _matches(case: BenchmarkCase, item: RelevantPassage, hit: SearchHit) -> bool:
+    """Match a hit to an edition, page, and optional section-prefix label."""
+
     section_matches = item.section_prefix is None or (
         hit.section is not None and hit.section.startswith(item.section_prefix)
     )
@@ -220,6 +250,8 @@ def _matches(case: BenchmarkCase, item: RelevantPassage, hit: SearchHit) -> bool
 
 
 def _citation_fields_complete(hit: SearchHit) -> bool:
+    """Check the provenance fields required for an actionable standards citation."""
+
     return (
         hit.page > 0
         and bool(hit.section)
@@ -229,6 +261,8 @@ def _citation_fields_complete(hit: SearchHit) -> bool:
 
 
 def _dcg(grades: tuple[int, ...] | list[int]) -> float:
+    """Calculate discounted cumulative gain for an ordered relevance sequence."""
+
     return float(
         sum((2**grade - 1) / math.log2(rank + 1) for rank, grade in enumerate(grades, start=1))
     )

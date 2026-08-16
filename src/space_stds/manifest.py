@@ -23,7 +23,10 @@ _STATUSES = {"active", "superseded", "obsolete", "draft"}
 
 
 def load_manifest(path: Path, corpus_root: Path) -> tuple[list[IngestRequest], str]:
+    """Validate an ingestion manifest and resolve every source within the corpus root."""
+
     resolved = path.expanduser().resolve()
+    corpus_root = corpus_root.expanduser().resolve()
     if not resolved.is_file():
         raise InvalidSourceError(f"Manifest is not a file: {resolved}")
     payload = resolved.read_bytes()
@@ -58,6 +61,17 @@ def load_manifest(path: Path, corpus_root: Path) -> tuple[list[IngestRequest], s
         relative_file = Path(item["file"])
         if relative_file.is_absolute():
             raise InvalidSourceError(f"Manifest document {index} file must be relative")
+        if ".." in relative_file.parts:
+            raise InvalidSourceError(
+                f"Manifest document {index} file must not contain parent-directory segments"
+            )
+        resolved_file = (corpus_root / relative_file).resolve()
+        try:
+            resolved_file.relative_to(corpus_root)
+        except ValueError as exc:
+            raise InvalidSourceError(
+                f"Manifest document {index} file must remain inside the corpus root"
+            ) from exc
         identity = (
             item["source"],
             item["document_id"].strip().upper(),
@@ -77,7 +91,7 @@ def load_manifest(path: Path, corpus_root: Path) -> tuple[list[IngestRequest], s
                 revision=item["revision"],
                 status=cast(DocumentStatus, item["status"]),
                 official_url=item["official_url"],
-                path=corpus_root / relative_file,
+                path=resolved_file,
             )
         )
     return requests, hashlib.sha256(payload).hexdigest()
