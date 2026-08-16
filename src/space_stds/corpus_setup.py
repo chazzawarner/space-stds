@@ -20,6 +20,8 @@ _ECSS_REVISION = re.compile(r"[-_ ]Rev\.?\s*(?P<revision>\d+)$", re.IGNORECASE)
 
 @dataclass(frozen=True, slots=True)
 class PreparationOutcome:
+    """Summarise a generated manifest and whether inferred metadata needs review."""
+
     documents: int
     inferred_metadata: int
     manifest_path: Path
@@ -112,6 +114,8 @@ def prepare_acquired_corpus(
 
 
 def _read_acquisition_manifest(path: Path) -> dict[str, Any]:
+    """Load a bounded acquisition manifest with the expected operating mode."""
+
     if not path.is_file():
         raise InvalidSourceError(f"Acquisition manifest is not a file: {path}")
     payload = path.read_bytes()
@@ -127,6 +131,8 @@ def _read_acquisition_manifest(path: Path) -> dict[str, Any]:
 
 
 def _validated_record(value: object, index: int) -> dict[str, str]:
+    """Validate and narrow one acquisition record to its required string fields."""
+
     if not isinstance(value, dict):
         raise InvalidSourceError(f"Acquisition record {index} must be an object")
     required = {
@@ -154,6 +160,8 @@ def _validated_record(value: object, index: int) -> dict[str, str]:
 
 
 def _local_file(corpus_root: Path, value: str, index: int) -> Path:
+    """Resolve an acquisition file while preventing escape from the corpus root."""
+
     relative = Path(value)
     if relative.is_absolute():
         raise InvalidSourceError(f"Acquisition record {index} local_file must be relative")
@@ -176,6 +184,8 @@ def _document_from_pdf(
     *,
     force_infer: bool = False,
 ) -> tuple[dict[str, str], bool]:
+    """Convert one acquired PDF into ingestion metadata, inferring ECSS identity if needed."""
+
     source = cast(Corpus, record["source"])
     was_inferred = (
         force_infer or not record["document_id"].strip() or not record["revision"].strip()
@@ -204,6 +214,8 @@ def _document_from_pdf(
 
 
 def _infer_ecss_identity(pdf: Path) -> tuple[str, str]:
+    """Infer an ECSS document identifier and revision from an archive filename."""
+
     stem = re.sub(r"\([^)]*\)$", "", pdf.stem).strip()
     revision_match = _ECSS_REVISION.search(stem)
     revision = revision_match.group("revision") if revision_match else "0"
@@ -216,6 +228,8 @@ def _infer_ecss_identity(pdf: Path) -> tuple[str, str]:
 
 
 def _existing_extracted_pdfs(root: Path, archive_hash: str) -> list[Path]:
+    """Verify a prior extraction against its archive receipt before reuse."""
+
     receipt_path = root / _EXTRACTION_RECEIPT
     try:
         receipt = json.loads(receipt_path.read_bytes())
@@ -245,6 +259,8 @@ def _existing_extracted_pdfs(root: Path, archive_hash: str) -> list[Path]:
 
 
 def _sha256_file(path: Path) -> str:
+    """Calculate a streaming SHA-256 digest for an acquired file."""
+
     digest = hashlib.sha256()
     with path.open("rb") as source:
         for block in iter(lambda: source.read(1024 * 1024), b""):

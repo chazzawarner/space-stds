@@ -24,6 +24,8 @@ _EXTRACTION_RECEIPT = ".space-stds-extraction.json"
 
 @dataclass(frozen=True)
 class OfficialDownload:
+    """Metadata needed to acquire one file from an allowlisted official host."""
+
     source: Corpus
     document_id: str
     title: str
@@ -36,11 +38,15 @@ class OfficialDownload:
 
     @property
     def filename(self) -> str:
+        """Return the decoded, path-safe filename from the download URL."""
+
         return _safe_filename(self.url)
 
 
 @dataclass(frozen=True)
 class DownloadOutcome:
+    """Record the verified local file produced by an acquisition attempt."""
+
     path: Path
     unchanged: bool
     sha256: str
@@ -48,23 +54,33 @@ class DownloadOutcome:
 
 
 class _LinkParser(HTMLParser):
+    """Collect anchor targets and their visible text from trusted catalogue HTML."""
+
     def __init__(self) -> None:
+        """Initialise an empty link collection and anchor parsing state."""
+
         super().__init__()
         self.links: list[tuple[str, str]] = []
         self._href: str | None = None
         self._text: list[str] = []
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        """Start collecting one anchor without interpreting other HTML elements."""
+
         if tag.casefold() != "a":
             return
         self._href = next((value for name, value in attrs if name == "href"), None)
         self._text = []
 
     def handle_data(self, data: str) -> None:
+        """Accumulate visible text while an anchor is open."""
+
         if self._href is not None:
             self._text.append(data)
 
     def handle_endtag(self, tag: str) -> None:
+        """Store a completed anchor target and its normalised visible text."""
+
         if tag.casefold() == "a" and self._href is not None:
             self.links.append((self._href, "".join(self._text).strip()))
             self._href = None
@@ -72,7 +88,11 @@ class _LinkParser(HTMLParser):
 
 
 class _RestrictedRedirectHandler(HTTPRedirectHandler):
+    """Reject redirects that leave the original official HTTPS host."""
+
     def __init__(self, host: str) -> None:
+        """Allow the canonical host and its ``www`` alias only."""
+
         super().__init__()
         self._hosts = {host, f"www.{host}"}
 
@@ -85,6 +105,8 @@ class _RestrictedRedirectHandler(HTTPRedirectHandler):
         headers: Any,
         newurl: str,
     ) -> Request | None:
+        """Validate a redirect target before delegating request construction."""
+
         parsed = urlparse(newurl)
         if parsed.scheme != "https" or parsed.hostname not in self._hosts:
             raise HTTPError(newurl, code, "Redirect left the official host", headers, fp)
@@ -92,6 +114,8 @@ class _RestrictedRedirectHandler(HTTPRedirectHandler):
 
 
 def _open_official(request: Request) -> Any:
+    """Open an official URL with a timeout and same-host redirect policy."""
+
     hostname = urlparse(request.full_url).hostname
     if hostname is None:
         raise ValueError(f"Official download URL has no host: {request.full_url}")
@@ -313,6 +337,8 @@ def _validated_pdf_members(
     max_member_bytes: int,
     max_total_bytes: int,
 ) -> list[tuple[ZipInfo, Path]]:
+    """Return safe PDF members after enforcing archive count and size limits."""
+
     entries = bundle.infolist()
     for info in entries:
         if stat.S_ISLNK(info.external_attr >> 16):
@@ -350,6 +376,8 @@ def _validated_pdf_members(
 
 
 def _fingerprint(path: Path, *, suffix: str, max_bytes: int) -> tuple[str, int]:
+    """Hash a bounded file and validate its signature against its suffix."""
+
     digest = hashlib.sha256()
     size = 0
     signature = b""
@@ -369,6 +397,8 @@ def _fingerprint(path: Path, *, suffix: str, max_bytes: int) -> tuple[str, int]:
 
 
 def _hash_file(path: Path) -> str:
+    """Calculate a streaming SHA-256 digest for a local file."""
+
     digest = hashlib.sha256()
     with path.open("rb") as source:
         for block in iter(lambda: source.read(1024 * 1024), b""):
@@ -377,6 +407,8 @@ def _hash_file(path: Path) -> str:
 
 
 def _first_link(fragment: object) -> str | None:
+    """Return the first anchor target encoded in a catalogue cell."""
+
     fragment = _catalogue_cell(fragment)
     parser = _LinkParser()
     parser.feed(html.unescape(fragment))
@@ -384,6 +416,8 @@ def _first_link(fragment: object) -> str | None:
 
 
 def _plain_text(fragment: object) -> str:
+    """Extract visible text from an HTML or scalar catalogue cell."""
+
     fragment = _catalogue_cell(fragment)
     parser = _LinkParser()
     parser.feed(html.unescape(fragment))
@@ -394,12 +428,16 @@ def _plain_text(fragment: object) -> str:
 
 
 def _catalogue_cell(value: object) -> str:
+    """Coerce a catalogue scalar to text while treating null as empty."""
+
     if value is None:
         return ""
     return value if isinstance(value, str) else str(value)
 
 
 def _is_allowed_download(url: str, host: str, suffix: str) -> bool:
+    """Check that a URL is HTTPS, on the allowlisted host, with the expected suffix."""
+
     parsed = urlparse(url)
     return (
         parsed.scheme == "https"
@@ -409,6 +447,8 @@ def _is_allowed_download(url: str, host: str, suffix: str) -> bool:
 
 
 def _safe_filename(url: str) -> str:
+    """Decode a URL basename and reject empty or path-like filenames."""
+
     filename = unquote(Path(urlparse(url).path).name)
     if not filename or filename in {".", ".."} or "/" in filename or "\\" in filename:
         raise ValueError(f"Download URL has an unsafe filename: {url}")
@@ -416,6 +456,8 @@ def _safe_filename(url: str) -> str:
 
 
 def _is_ccsds_detail_url(url: str) -> bool:
+    """Identify CCSDS publication detail pages on the official catalogue path."""
+
     parsed = urlparse(url)
     return (
         parsed.scheme == "https"

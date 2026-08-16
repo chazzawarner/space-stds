@@ -23,6 +23,8 @@ _STATUSES = {"active", "superseded", "obsolete", "draft"}
 
 
 def load_manifest(path: Path, corpus_root: Path) -> tuple[list[IngestRequest], str]:
+    """Validate an ingestion manifest and resolve every source within the corpus root."""
+
     resolved = path.expanduser().resolve()
     corpus_root = corpus_root.expanduser().resolve()
     if not resolved.is_file():

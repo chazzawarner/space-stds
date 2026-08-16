@@ -30,6 +30,8 @@ class AmbiguousDocumentError(SpaceStdsError):
 
 @dataclass(frozen=True, slots=True)
 class IngestRequest:
+    """Describe one authorised document edition to validate and index."""
+
     source: Corpus
     document_id: str
     title: str
@@ -41,6 +43,8 @@ class IngestRequest:
 
 @dataclass(frozen=True, slots=True)
 class IngestOutcome:
+    """Report index and extraction diagnostics for one document ingestion."""
+
     document_key: str
     content_hash: str
     indexed_passages: int
@@ -54,6 +58,8 @@ class IngestOutcome:
 
 @dataclass(frozen=True, slots=True)
 class ManifestOutcome:
+    """Report aggregate diagnostics for an atomic manifest ingestion."""
+
     indexed_documents: int
     indexed_passages: int
     manifest_hash: str
@@ -66,6 +72,8 @@ class ManifestOutcome:
 
 @dataclass(frozen=True, slots=True)
 class Document:
+    """Expose edition-specific document metadata and immutable provenance."""
+
     document_key: str
     source: Corpus
     document_id: str
@@ -81,6 +89,8 @@ class Document:
 
 @dataclass(frozen=True, slots=True)
 class SearchHit:
+    """Represent a ranked passage excerpt with the fields needed for citation."""
+
     passage_id: str
     source: Corpus
     document_id: str
@@ -96,6 +106,8 @@ class SearchHit:
 
 @dataclass(frozen=True, slots=True)
 class Passage:
+    """Represent complete indexed passage content with edition provenance."""
+
     passage_id: str
     source: Corpus
     document_id: str

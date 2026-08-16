@@ -15,6 +15,8 @@ from space_stds.service import StandardsService
 
 
 def create_server(service: StandardsService) -> MCPServer:
+    """Expose the read-only standards service as MCP tools and citation resources."""
+
     server = MCPServer(
         "space-stds",
         description="Read-only retrieval from locally authorised CCSDS and ECSS standards",
@@ -42,6 +44,8 @@ def create_server(service: StandardsService) -> MCPServer:
         status: DocumentStatus | None = None,
         limit: int = 10,
     ) -> list[dict[str, Any]]:
+        """Return ranked local passages with optional edition and status filters."""
+
         hits = service.search(
             query,
             source=source,
@@ -65,6 +69,8 @@ def create_server(service: StandardsService) -> MCPServer:
         revision: str | None = None,
         source: Corpus | None = None,
     ) -> dict[str, Any]:
+        """Return metadata for one unambiguous indexed document edition."""
+
         try:
             return service.serialise(
                 service.get_document(document_id, revision=revision, source=source)
@@ -80,6 +86,8 @@ def create_server(service: StandardsService) -> MCPServer:
         structured_output=True,
     )
     def get_passage(passage_id: str) -> dict[str, Any]:
+        """Return the exact indexed passage identified by a search result."""
+
         try:
             return service.serialise(service.get_passage(passage_id))
         except PassageNotFoundError as exc:
@@ -92,6 +100,8 @@ def create_server(service: StandardsService) -> MCPServer:
         mime_type="application/json",
     )
     def passage_resource(passage_id: str) -> str:
+        """Serialise one citation resource as JSON for MCP resource readers."""
+
         try:
             passage = service.serialise(service.get_passage(passage_id))
             return json.dumps(passage, ensure_ascii=False)
@@ -105,6 +115,8 @@ def create_server(service: StandardsService) -> MCPServer:
         mime_type="application/json",
     )
     def document_resource(document_key: str) -> str:
+        """Serialise one exact document edition as an MCP JSON resource."""
+
         try:
             document = service.serialise(service.get_document_by_key(document_key))
             return json.dumps(document, ensure_ascii=False)

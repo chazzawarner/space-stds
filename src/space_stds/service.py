@@ -85,6 +85,8 @@ class StandardsService:
         *,
         pdf_backend: PdfBackend = "pypdf",
     ) -> None:
+        """Initialise local storage, the corpus boundary, and the search schema."""
+
         self.database_path = database_path.expanduser().resolve()
         self.corpus_root = corpus_root.expanduser().resolve()
         self.pdf_backend = pdf_backend
@@ -93,6 +95,8 @@ class StandardsService:
         self._initialise()
 
     def ingest(self, request: IngestRequest) -> IngestOutcome:
+        """Validate and atomically replace one indexed document edition."""
+
         source_path = self._validated_source_path(request.path)
         self._validate_metadata(request)
         size = source_path.stat().st_size
@@ -185,6 +189,8 @@ class StandardsService:
         )
 
     def ingest_manifest(self, manifest_path: Path) -> ManifestOutcome:
+        """Build a complete staged index and replace the live database atomically."""
+
         requests, manifest_hash = load_manifest(manifest_path, self.corpus_root)
         with tempfile.TemporaryDirectory(
             prefix=".space-stds-stage-", dir=self.database_path.parent
@@ -225,6 +231,8 @@ class StandardsService:
         status: DocumentStatus | None = None,
         limit: int = 10,
     ) -> list[SearchHit]:
+        """Return citation-rich passages ranked by lexical relevance and coverage."""
+
         if not 1 <= limit <= 50:
             raise ValueError("limit must be between 1 and 50")
         match_query = _fts_query(query)
@@ -283,6 +291,8 @@ class StandardsService:
     def get_document(
         self, document_id: str, *, revision: str | None = None, source: Corpus | None = None
     ) -> Document:
+        """Resolve one document edition, rejecting absent or ambiguous identifiers."""
+
         conditions = ["d.document_id = ? COLLATE NOCASE"]
         parameters: list[object] = [document_id.strip()]
         if revision is not None:
@@ -317,6 +327,8 @@ class StandardsService:
         return _document_from_row(rows[0])
 
     def get_document_by_key(self, document_key: str) -> Document:
+        """Return the exact document edition addressed by an opaque resource key."""
+
         with self._connect() as connection:
             row = connection.execute(
                 """
@@ -336,6 +348,8 @@ class StandardsService:
         return _document_from_row(row)
 
     def get_passage(self, passage_id: str) -> Passage:
+        """Return complete passage content and immutable source provenance."""
+
         with self._connect() as connection:
             row = connection.execute(
                 """
@@ -371,9 +385,13 @@ class StandardsService:
     def serialise(
         value: IngestOutcome | ManifestOutcome | Document | SearchHit | Passage,
     ) -> dict[str, Any]:
+        """Convert a supported immutable domain record to structured output."""
+
         return asdict(value)
 
     def _validated_source_path(self, candidate: Path) -> Path:
+        """Resolve a PDF source and enforce the configured corpus boundary."""
+
         resolved = candidate.expanduser().resolve()
         try:
             resolved.relative_to(self.corpus_root)
@@ -389,6 +407,8 @@ class StandardsService:
 
     @staticmethod
     def _validate_metadata(request: IngestRequest) -> None:
+        """Require complete identity fields and an official allowlisted HTTPS URL."""
+
         for name, value in (
             ("document_id", request.document_id),
             ("title", request.title),
@@ -405,6 +425,8 @@ class StandardsService:
 
     @contextmanager
     def _connect(self) -> Iterator[sqlite3.Connection]:
+        """Yield a configured transactional connection and always close it."""
+
         connection = sqlite3.connect(self.database_path)
         try:
             connection.row_factory = sqlite3.Row
@@ -416,6 +438,8 @@ class StandardsService:
             connection.close()
 
     def _replace_database(self, replacement_path: Path) -> None:
+        """Checkpoint the live index before atomically installing a staged database."""
+
         with self._connect() as connection:
             checkpoint = connection.execute("PRAGMA wal_checkpoint(TRUNCATE)").fetchone()
             if checkpoint is not None and checkpoint[0] != 0:
@@ -428,6 +452,8 @@ class StandardsService:
         self._initialise()
 
     def _initialise(self) -> None:
+        """Create or migrate the persistent tables, indexes, triggers, and FTS index."""
+
         with self._connect() as connection:
             connection.executescript(
                 """
@@ -464,6 +490,8 @@ class StandardsService:
 
 
 def _document_key(request: IngestRequest) -> str:
+    """Derive a stable opaque key from source, document identifier, and revision."""
+
     canonical = "|".join(
         (request.source, request.document_id.strip().upper(), request.revision.strip().upper())
     )
@@ -472,6 +500,8 @@ def _document_key(request: IngestRequest) -> str:
 
 @dataclass(frozen=True, order=True, slots=True)
 class _RetrievalRank:
+    """Define deterministic ordering signals for lexical retrieval candidates."""
+
     negative_bigrams: int
     negative_title_matches: int
     negative_coverage: int
@@ -484,10 +514,14 @@ class _RetrievalRank:
 
     @property
     def coverage(self) -> int:
+        """Expose positive query-term coverage from the sort-oriented stored value."""
+
         return -self.negative_coverage
 
 
 def _diversify_documents(rows: list[sqlite3.Row], limit: int) -> list[sqlite3.Row]:
+    """Reserve result capacity for distinct editions before adding repeat passages."""
+
     selected: list[sqlite3.Row] = []
     deferred: list[sqlite3.Row] = []
     documents: set[tuple[str, str, str]] = set()
@@ -507,10 +541,14 @@ def _diversify_documents(rows: list[sqlite3.Row], limit: int) -> list[sqlite3.Ro
 
 
 def _rerank_rows(rows: list[sqlite3.Row], query: str) -> list[sqlite3.Row]:
+    """Rerank FTS candidates by phrase, title, term, and section coverage."""
+
     query_roots = _token_roots(query)
     query_bigrams = set(zip(query_roots, query_roots[1:], strict=False))
 
     def rank(row: sqlite3.Row) -> _RetrievalRank:
+        """Calculate deterministic semantic and lexical signals for one candidate."""
+
         title_roots = _token_roots(row["title"])
         section_roots = _token_roots(row["section"] or "")
         combined_roots = _token_roots(
@@ -544,6 +582,8 @@ def _rerank_rows(rows: list[sqlite3.Row], query: str) -> list[sqlite3.Row]:
 
 
 def _ensure_search_schema(connection: sqlite3.Connection) -> None:
+    """Migrate passage fields and rebuild FTS when its external-content schema changes."""
+
     passage_columns = {
         row[1] for row in connection.execute("PRAGMA table_info(passages)").fetchall()
     }
@@ -630,6 +670,8 @@ def _ensure_search_schema(connection: sqlite3.Connection) -> None:
 
 @contextmanager
 def _managed_connection(path: Path) -> Iterator[sqlite3.Connection]:
+    """Yield a transactional SQLite connection and close it on every exit path."""
+
     connection = sqlite3.connect(path)
     try:
         with connection:
@@ -639,6 +681,8 @@ def _managed_connection(path: Path) -> Iterator[sqlite3.Connection]:
 
 
 def _sha256_file(path: Path) -> str:
+    """Calculate a streaming SHA-256 digest for an authorised source PDF."""
+
     digest = hashlib.sha256()
     with path.open("rb") as source:
         for block in iter(lambda: source.read(1024 * 1024), b""):
@@ -647,6 +691,8 @@ def _sha256_file(path: Path) -> str:
 
 
 def _fts_query(query: str) -> str:
+    """Translate meaningful query terms into a bounded FTS any-term expression."""
+
     tokens = _query_tokens(query)
     if not tokens:
         raise ValueError("query must contain at least one searchable term")
@@ -654,6 +700,8 @@ def _fts_query(query: str) -> str:
 
 
 def _excerpt(content: str, query: str, *, width: int = 600) -> str:
+    """Select a bounded excerpt around the earliest matching meaningful term."""
+
     lowered = content.casefold()
     positions = [lowered.find(token.casefold()) for token in _query_tokens(query)]
     starts = [position for position in positions if position >= 0]
@@ -666,6 +714,8 @@ def _excerpt(content: str, query: str, *, width: int = 600) -> str:
 
 
 def _query_tokens(query: str) -> list[str]:
+    """Return unique case-folded query tokens, preferring non-stopwords."""
+
     tokens = _QUERY_TOKEN.findall(query)
     meaningful = [token for token in tokens if token.casefold() not in _QUERY_STOPWORDS]
     selected = meaningful or tokens
@@ -673,10 +723,14 @@ def _query_tokens(query: str) -> list[str]:
 
 
 def _token_roots(text: str) -> list[str]:
+    """Reduce searchable tokens to lightweight roots used by the reranker."""
+
     return [_light_stem(token) for token in _query_tokens(text)]
 
 
 def _light_stem(token: str) -> str:
+    """Remove a small set of English suffixes without an external stemmer."""
+
     if len(token) > 5 and token.endswith("ies"):
         return f"{token[:-3]}y"
     for suffix in ("able", "ible", "ing", "ed", "es", "s"):
@@ -686,14 +740,20 @@ def _light_stem(token: str) -> str:
 
 
 def _resource_uri(passage_id: str) -> str:
+    """Build the canonical MCP resource URI for an indexed passage."""
+
     return f"space-stds://passages/{passage_id}"
 
 
 def _document_resource_uri(document_key: str) -> str:
+    """Build the canonical MCP resource URI for one document edition."""
+
     return f"space-stds://documents/{document_key}"
 
 
 def _document_from_row(row: sqlite3.Row) -> Document:
+    """Map a document query row to the public immutable domain record."""
+
     return Document(
         document_key=row["document_key"],
         source=row["source"],

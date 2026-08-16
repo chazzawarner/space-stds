@@ -14,6 +14,8 @@ from space_stds.service import StandardsService
 
 
 def build_parser() -> argparse.ArgumentParser:
+    """Build the command-line contract for setup, ingestion, retrieval, and serving."""
+
     parser = argparse.ArgumentParser(
         prog="space-stds",
         description=(
@@ -72,6 +74,8 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def main(argv: Sequence[str] | None = None) -> int:
+    """Run one CLI command and translate expected domain failures into usage errors."""
+
     parser = build_parser()
     args = parser.parse_args(argv)
     settings = Settings.from_environment()
@@ -157,6 +161,8 @@ def main(argv: Sequence[str] | None = None) -> int:
 
 
 def _print_json(value: object) -> None:
+    """Write a human-readable JSON value without escaping Unicode text."""
+
     print(json.dumps(value, indent=2, ensure_ascii=False))
 
 

@@ -23,6 +23,8 @@ PdfBackend = Literal["pypdf", "pdf-inspector"]
 
 @dataclass(frozen=True, slots=True)
 class ExtractedPassage:
+    """Hold one page-local text chunk and its most recent section heading."""
+
     page: int
     section: str | None
     content: str
@@ -30,6 +32,8 @@ class ExtractedPassage:
 
 @dataclass(frozen=True, slots=True)
 class ExtractionResult:
+    """Return extracted passages together with backend quality diagnostics."""
+
     passages: tuple[ExtractedPassage, ...]
     backend: PdfBackend
     page_count: int
@@ -44,6 +48,8 @@ def extract_pdf(
     backend: PdfBackend | str = "pypdf",
     max_pages: int = 5_000,
 ) -> ExtractionResult:
+    """Extract a bounded local PDF with the explicitly selected backend."""
+
     if backend == "pypdf":
         return _extract_with_pypdf(path, max_pages=max_pages)
     if backend == "pdf-inspector":
@@ -52,6 +58,8 @@ def extract_pdf(
 
 
 def _extract_with_pypdf(path: Path, *, max_pages: int) -> ExtractionResult:
+    """Extract page text with pypdf and flag pages that need authorised OCR."""
+
     try:
         reader = PdfReader(path)
     except (PdfReadError, OSError, ValueError) as exc:
@@ -89,6 +97,8 @@ def _extract_with_pypdf(path: Path, *, max_pages: int) -> ExtractionResult:
 
 
 def _extract_with_pdf_inspector(path: Path, *, max_pages: int) -> ExtractionResult:
+    """Extract Markdown and layout diagnostics with the optional PDF Inspector backend."""
+
     try:
         import pdf_inspector
     except ImportError as exc:
@@ -126,6 +136,8 @@ def _extract_with_pdf_inspector(path: Path, *, max_pages: int) -> ExtractionResu
 
 
 def _normalise_markdown_lines(markdown: str) -> list[str]:
+    """Normalise Inspector Markdown into lines suitable for section chunking."""
+
     lines: list[str] = []
     for raw_line in markdown.splitlines():
         line = _MARKDOWN_HEADING.sub("", raw_line.strip())
@@ -146,6 +158,8 @@ def _append_page_passages(
     lines: list[str],
     current_section: str | None,
 ) -> str | None:
+    """Append page-local chunks while carrying the latest section across pages."""
+
     chunk_lines: list[str] = []
     chunk_section = current_section
     found_heading = False
@@ -176,6 +190,8 @@ def _append_page_passages(
 
 
 def parse_backend(value: str) -> PdfBackend:
+    """Narrow a configuration string to a supported PDF backend name."""
+
     if value not in {"pypdf", "pdf-inspector"}:
         raise ValueError("PDF backend must be pypdf or pdf-inspector")
     return cast(PdfBackend, value)
