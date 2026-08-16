@@ -1,0 +1,15 @@
+{
+  "evaluated_corpus": {
+    "documents": 11,
+    "status": ["active"],
+    "sources": ["CCSDS", "ECSS"],
+    "publication_types": ["standard"]
+  },
+  "deferred_until_authorised_content_is_indexed": [
+    "CCSDS and ECSS handbooks",
+    "ECSS Technical Memoranda",
+    "obsolete and superseded editions",
+    "SANA registry records"
+  ],
+  "reason": "The benchmark must not invent relevance labels for material absent from the authorised local corpus. Add cases with the corresponding ingestion change."
+}

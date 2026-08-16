@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "documents": [
+    {
+      "source": "CCSDS",
+      "document_id": "CCSDS 131.0-B-6",
+      "title": "TM Synchronization and Channel Coding",
+      "revision": "6",
+      "status": "active",
+      "official_url": "https://ccsds.org/replace-with-the-exact-official-publication-url.pdf",
+      "file": "ccsds/131x0b6ec1.pdf"
+    },
+    {
+      "source": "ECSS",
+      "document_id": "ECSS-E-ST-10-02C",
+      "title": "Verification",
+      "revision": "1",
+      "status": "active",
+      "official_url": "https://ecss.nl/replace-with-the-exact-official-publication-url.pdf",
+      "file": "ecss/ECSS-E-ST-10-02C-Rev1.pdf"
+    }
+  ]
+}

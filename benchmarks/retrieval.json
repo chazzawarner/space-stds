@@ -1,0 +1,556 @@
+[
+  {
+    "id": "ccsds-asm-definition",
+    "question": "In CCSDS 131.0-B-6, what is an attached sync marker?",
+    "source": "CCSDS",
+    "tags": ["definition", "acronym"],
+    "relevant": [
+      {"document_id": "CCSDS 131.0-B-6", "revision": "6", "page": 22, "section_prefix": "2.2.5", "relevance": 3},
+      {"document_id": "CCSDS 131.0-B-6", "revision": "6", "page": 70, "section_prefix": null, "relevance": 2}
+    ]
+  },
+  {
+    "id": "ccsds-aos-vc-count-cycle",
+    "question": "How is the virtual channel frame count cycle incremented?",
+    "source": "CCSDS",
+    "tags": ["requirement", "procedure"],
+    "relevant": [
+      {"document_id": "CCSDS 732.0-B-5", "revision": "5", "page": 60, "section_prefix": "4.1.2.5.5.2", "relevance": 3}
+    ]
+  },
+  {
+    "id": "ccsds-space-packet-primary-header",
+    "question": "What fields are in the space packet primary header?",
+    "source": "CCSDS",
+    "tags": ["structure", "multi-passage"],
+    "relevant": [
+      {"document_id": "CCSDS 133.0-B-2", "revision": "2", "page": 32, "section_prefix": "4.1.3.2.1", "relevance": 3},
+      {"document_id": "CCSDS 133.0-B-2", "revision": "2", "page": 33, "section_prefix": "4.1.3.3", "relevance": 3},
+      {"document_id": "CCSDS 133.0-B-2", "revision": "2", "page": 34, "section_prefix": "4.1.3.4", "relevance": 3},
+      {"document_id": "CCSDS 133.0-B-2", "revision": "2", "page": 36, "section_prefix": "4.1.3.5.1", "relevance": 3}
+    ]
+  },
+  {
+    "id": "ccsds-tm-tc-distinction",
+    "question": "How are TM transfer frames distinguished from TC transfer frames?",
+    "source": "CCSDS",
+    "tags": ["comparison", "acronym"],
+    "relevant": [
+      {"document_id": "CCSDS 132.0-B-3", "revision": "3", "page": 62, "section_prefix": "4.1.2.2.2.2", "relevance": 3}
+    ]
+  },
+  {
+    "id": "ccsds-tc-frame-version",
+    "question": "What identifies the TC transfer frame version number?",
+    "source": "CCSDS",
+    "tags": ["structure", "acronym"],
+    "relevant": [
+      {"document_id": "CCSDS 232.0-B-4", "revision": "4", "page": 70, "section_prefix": "4.1.2.2", "relevance": 3}
+    ]
+  },
+  {
+    "id": "ccsds-cltu-start-sequence",
+    "question": "What is the communications link transmission unit start sequence?",
+    "source": "CCSDS",
+    "tags": ["structure", "terminology"],
+    "relevant": [
+      {"document_id": "CCSDS 231.0-B-4", "revision": "4", "page": 29, "section_prefix": "5.2.2.1", "relevance": 3}
+    ]
+  },
+  {
+    "id": "ccsds-packet-sequence-count",
+    "question": "What does the packet sequence count identify?",
+    "source": "CCSDS",
+    "tags": ["definition", "structure"],
+    "relevant": [
+      {"document_id": "CCSDS 133.0-B-2", "revision": "2", "page": 35, "section_prefix": "4.1.3.4.3", "relevance": 3}
+    ]
+  },
+  {
+    "id": "ccsds-tm-pseudo-randomization",
+    "question": "How does pseudo-randomization work for TM channel coding?",
+    "source": "CCSDS",
+    "tags": ["procedure", "terminology"],
+    "relevant": [
+      {"document_id": "CCSDS 131.0-B-6", "revision": "6", "page": 69, "section_prefix": "10.1", "relevance": 3}
+    ]
+  },
+  {
+    "id": "ccsds-aos-mcid",
+    "question": "What does the AOS master channel identifier contain?",
+    "source": "CCSDS",
+    "tags": ["cross-standard", "acronym"],
+    "relevant": [
+      {"document_id": "CCSDS 732.0-B-5", "revision": "5", "page": 48, "section_prefix": "3.8.2.3", "relevance": 3},
+      {"document_id": "CCSDS 132.0-B-3", "revision": "3", "page": 62, "section_prefix": "4.1.2.2.1", "relevance": 2}
+    ]
+  },
+  {
+    "id": "ccsds-tm-frame-error-control",
+    "question": "When is the frame error control field present in a TM transfer frame?",
+    "source": "CCSDS",
+    "tags": ["requirement", "acronym"],
+    "relevant": [
+      {"document_id": "CCSDS 132.0-B-3", "revision": "3", "page": 87, "section_prefix": "4.3.7.2", "relevance": 3}
+    ]
+  },
+  {
+    "id": "ecss-vcd-requirements",
+    "question": "What is required for a verification control document?",
+    "source": "ECSS",
+    "tags": ["requirement", "document"],
+    "relevant": [
+      {"document_id": "ECSS-E-ST-10-02C", "revision": "1", "page": 26, "section_prefix": "5.4.4.1", "relevance": 3},
+      {"document_id": "ECSS-E-ST-10-02C", "revision": "1", "page": 22, "section_prefix": "5.2.8.2", "relevance": 2}
+    ]
+  },
+  {
+    "id": "ecss-verification-methods",
+    "question": "Which verification methods can be selected?",
+    "source": "ECSS",
+    "tags": ["requirement", "cross-standard"],
+    "relevant": [
+      {"document_id": "ECSS-E-ST-10-02C", "revision": "1", "page": 12, "section_prefix": "4.2.2", "relevance": 3},
+      {"document_id": "ECSS-E-ST-10-02C", "revision": "1", "page": 15, "section_prefix": "5.2.2.1", "relevance": 3},
+      {"document_id": "ECSS-E-ST-10C", "revision": "1", "page": 101, "section_prefix": null, "relevance": 1}
+    ]
+  },
+  {
+    "id": "ecss-idd-definition",
+    "question": "What information is recorded in an interface identification document?",
+    "source": "ECSS",
+    "tags": ["definition", "document"],
+    "relevant": [
+      {"document_id": "ECSS-E-ST-10-24C", "revision": "1", "page": 10, "section_prefix": "3.2.6", "relevance": 3}
+    ]
+  },
+  {
+    "id": "ecss-interface-requirements",
+    "question": "What interface requirements must the customer define in the IRD?",
+    "source": "ECSS",
+    "tags": ["requirement", "document"],
+    "relevant": [
+      {"document_id": "ECSS-E-ST-10-24C", "revision": "1", "page": 15, "section_prefix": "4.2.4", "relevance": 3},
+      {"document_id": "ECSS-E-ST-10-24C", "revision": "1", "page": 25, "section_prefix": "5.3", "relevance": 3},
+      {"document_id": "ECSS-E-ST-10-24C", "revision": "1", "page": 32, "section_prefix": "5.8.2", "relevance": 1},
+      {"document_id": "ECSS-E-ST-40C", "revision": "1", "page": 40, "section_prefix": "5.2.4.3", "relevance": 1}
+    ]
+  },
+  {
+    "id": "ecss-sep-content",
+    "question": "What belongs in a system engineering plan?",
+    "source": "ECSS",
+    "tags": ["annex", "document"],
+    "relevant": [
+      {"document_id": "ECSS-E-ST-10C", "revision": "1", "page": 62, "section_prefix": null, "relevance": 3}
+      ,{"document_id": "ECSS-E-ST-10C", "revision": "1", "page": 24, "section_prefix": "5.1", "relevance": 2}
+      ,{"document_id": "ECSS-E-ST-10C", "revision": "1", "page": 25, "section_prefix": "5.1", "relevance": 2}
+    ]
+  },
+  {
+    "id": "ecss-technical-budgets",
+    "question": "What does the system engineering function do with technical budgets and margin policy?",
+    "source": "ECSS",
+    "tags": ["requirement", "procedure"],
+    "relevant": [
+      {"document_id": "ECSS-E-ST-10C", "revision": "1", "page": 31, "section_prefix": "5.4.1.2", "relevance": 3}
+    ]
+  },
+  {
+    "id": "ecss-software-lifecycle-processes",
+    "question": "Which software life cycle processes are required?",
+    "source": "ECSS",
+    "tags": ["structure", "process"],
+    "relevant": [
+      {"document_id": "ECSS-E-ST-40C", "revision": "1", "page": 24, "section_prefix": "4.1", "relevance": 3}
+    ]
+  },
+  {
+    "id": "ecss-srs-content",
+    "question": "What belongs in the software requirements specification?",
+    "source": "ECSS",
+    "tags": ["annex", "document", "cross-standard"],
+    "relevant": [
+      {"document_id": "ECSS-E-ST-40C", "revision": "1", "page": 121, "section_prefix": null, "relevance": 3},
+      {"document_id": "ECSS-E-ST-40C", "revision": "1", "page": 120, "section_prefix": null, "relevance": 2},
+      {"document_id": "ECSS-Q-ST-80C", "revision": "2", "page": 63, "section_prefix": "6.3.2.4", "relevance": 2},
+      {"document_id": "ECSS-E-ST-40C", "revision": "1", "page": 95, "section_prefix": "5.11.5.2", "relevance": 1},
+      {"document_id": "ECSS-E-ST-40C", "revision": "1", "page": 96, "section_prefix": "5.11.5.2", "relevance": 1}
+    ]
+  },
+  {
+    "id": "ecss-software-criticality",
+    "question": "What are the software criticality categories?",
+    "source": "ECSS",
+    "tags": ["annex", "table", "cross-standard"],
+    "relevant": [
+      {"document_id": "ECSS-Q-ST-80C", "revision": "2", "page": 101, "section_prefix": null, "relevance": 3},
+      {"document_id": "ECSS-Q-ST-80C", "revision": "2", "page": 13, "section_prefix": "3.2.8", "relevance": 2},
+      {"document_id": "ECSS-E-ST-40C", "revision": "1", "page": 14, "section_prefix": "3.2.7", "relevance": 2}
+    ]
+  },
+  {
+    "id": "ecss-assurance-verification-report",
+    "question": "What summary of verification assurance activities and findings must the reports include?",
+    "source": "ECSS",
+    "tags": ["requirement", "assurance"],
+    "relevant": [
+      {"document_id": "ECSS-Q-ST-80C", "revision": "2", "page": 51, "section_prefix": "6.2.6.3", "relevance": 3}
+    ]
+  },
+  {
+    "id": "ccsds-131-architecture",
+    "question": "How does CCSDS 131.0-B-6 relate synchronization and coding to the OSI model?",
+    "source": "CCSDS",
+    "tags": ["exact-id", "architecture"],
+    "relevant": [
+      {"document_id": "CCSDS 131.0-B-6", "revision": "6", "page": 20, "section_prefix": "2.1", "relevance": 3}
+    ]
+  },
+  {
+    "id": "ccsds-rs-polynomial",
+    "question": "Where is the Reed-Solomon code generator polynomial specified?",
+    "source": "CCSDS",
+    "tags": ["equation", "exact-section"],
+    "relevant": [
+      {"document_id": "CCSDS 131.0-B-6", "revision": "6", "page": 36, "section_prefix": "5.3.4", "relevance": 3}
+    ]
+  },
+  {
+    "id": "ccsds-turbo-code-purpose",
+    "question": "Why are turbo codes used for telemetry channel coding?",
+    "source": "CCSDS",
+    "tags": ["explanation", "terminology"],
+    "relevant": [
+      {"document_id": "CCSDS 131.0-B-6", "revision": "6", "page": 44, "section_prefix": null, "relevance": 3}
+    ]
+  },
+  {
+    "id": "ccsds-sliced-frame-length",
+    "question": "What is the maximum transfer-frame length when slicing is used?",
+    "source": "CCSDS",
+    "tags": ["requirement", "numeric"],
+    "relevant": [
+      {"document_id": "CCSDS 131.0-B-6", "revision": "6", "page": 74, "section_prefix": "11.5", "relevance": 3}
+    ]
+  },
+  {
+    "id": "ccsds-tm-service-restrictions",
+    "question": "What restrictions apply to services on a TM physical channel?",
+    "source": "CCSDS",
+    "tags": ["requirement", "services"],
+    "relevant": [
+      {"document_id": "CCSDS 132.0-B-3", "revision": "3", "page": 27, "section_prefix": "2.2.4", "relevance": 3}
+    ]
+  },
+  {
+    "id": "ccsds-tm-vcid",
+    "question": "What does the TM virtual channel identifier identify?",
+    "source": "CCSDS",
+    "tags": ["definition", "acronym"],
+    "relevant": [
+      {"document_id": "CCSDS 132.0-B-3", "revision": "3", "page": 63, "section_prefix": "4.1.2.3", "relevance": 3}
+    ]
+  },
+  {
+    "id": "ccsds-invalid-vcid",
+    "question": "What happens to a received TM frame with an invalid VCID?",
+    "source": "CCSDS",
+    "tags": ["requirement", "error-handling"],
+    "relevant": [
+      {"document_id": "CCSDS 132.0-B-3", "revision": "3", "page": 84, "section_prefix": "4.3.4.3", "relevance": 3}
+    ]
+  },
+  {
+    "id": "ccsds-spp-description",
+    "question": "In what terms is the Space Packet Protocol described?",
+    "source": "CCSDS",
+    "tags": ["architecture", "terminology"],
+    "relevant": [
+      {"document_id": "CCSDS 133.0-B-2", "revision": "2", "page": 19, "section_prefix": "2.1.4", "relevance": 3}
+    ]
+  },
+  {
+    "id": "ccsds-space-packet-size",
+    "question": "What are the minimum and maximum sizes of a Space Packet?",
+    "source": "CCSDS",
+    "tags": ["requirement", "numeric"],
+    "relevant": [
+      {"document_id": "CCSDS 133.0-B-2", "revision": "2", "page": 32, "section_prefix": "4.1.2.2", "relevance": 3}
+      ,{"document_id": "CCSDS 133.0-B-2", "revision": "2", "page": 24, "section_prefix": "3.2.2.1", "relevance": 2}
+    ]
+  },
+  {
+    "id": "ccsds-secondary-header-mandatory",
+    "question": "When is the Space Packet secondary header mandatory?",
+    "source": "CCSDS",
+    "tags": ["requirement", "conditional"],
+    "relevant": [
+      {"document_id": "CCSDS 133.0-B-2", "revision": "2", "page": 36, "section_prefix": "4.1.4.2.1.2", "relevance": 3}
+    ]
+  },
+  {
+    "id": "ccsds-tc-randomizer-purpose",
+    "question": "Why is the optional TC randomizer used?",
+    "source": "CCSDS",
+    "tags": ["explanation", "acronym"],
+    "relevant": [
+      {"document_id": "CCSDS 231.0-B-4", "revision": "4", "page": 19, "section_prefix": "2.2.4", "relevance": 3}
+    ]
+  },
+  {
+    "id": "ccsds-bch-codeword",
+    "question": "How many information and parity bits are used in the TC BCH codeword?",
+    "source": "CCSDS",
+    "tags": ["requirement", "numeric", "acronym"],
+    "relevant": [
+      {"document_id": "CCSDS 231.0-B-4", "revision": "4", "page": 23, "section_prefix": null, "relevance": 3}
+    ]
+  },
+  {
+    "id": "ccsds-cltu-structure",
+    "question": "What data structure carries encoded TC codewords across the coding sublayer?",
+    "source": "CCSDS",
+    "tags": ["definition", "structure"],
+    "relevant": [
+      {"document_id": "CCSDS 231.0-B-4", "revision": "4", "page": 29, "section_prefix": "5.2.1", "relevance": 3}
+    ]
+  },
+  {
+    "id": "ccsds-tc-frame-parameter",
+    "question": "What do the Frame and GVCID parameters represent in the TC virtual-channel frame service?",
+    "source": "CCSDS",
+    "tags": ["service", "acronym"],
+    "relevant": [
+      {"document_id": "CCSDS 232.0-B-4", "revision": "4", "page": 58, "section_prefix": "3.7.2.2", "relevance": 3},
+      {"document_id": "CCSDS 232.0-B-4", "revision": "4", "page": 58, "section_prefix": "3.7.2.3", "relevance": 2}
+    ]
+  },
+  {
+    "id": "ccsds-tc-segment-header",
+    "question": "In CCSDS 232.0-B-4, which fields are contained in the TC segment header?",
+    "source": "CCSDS",
+    "tags": ["structure", "requirement"],
+    "relevant": [
+      {"document_id": "CCSDS 232.0-B-4", "revision": "4", "page": 75, "section_prefix": "4.1.3.2.2.1.4", "relevance": 3}
+    ]
+  },
+  {
+    "id": "ccsds-aos-general-functions",
+    "question": "What kinds of service data units does the AOS protocol transfer?",
+    "source": "CCSDS",
+    "tags": ["architecture", "acronym"],
+    "relevant": [
+      {"document_id": "CCSDS 732.0-B-5", "revision": "5", "page": 26, "section_prefix": "2.3.1", "relevance": 3}
+      ,{"document_id": "CCSDS 732.0-B-5", "revision": "5", "page": 31, "section_prefix": "3.2.5.1", "relevance": 2}
+      ,{"document_id": "CCSDS 732.0-B-5", "revision": "5", "page": 63, "section_prefix": "4.1.4.1.3", "relevance": 2}
+    ]
+  },
+  {
+    "id": "ccsds-aos-insert-request",
+    "question": "What is the AOS INSERT.request primitive used for?",
+    "source": "CCSDS",
+    "tags": ["service", "exact-term"],
+    "relevant": [
+      {"document_id": "CCSDS 732.0-B-5", "revision": "5", "page": 52, "section_prefix": "3.9.3.2.5", "relevance": 3}
+    ]
+  },
+  {
+    "id": "ccsds-aos-bitstream-processing",
+    "question": "How does AOS bitstream processing carry variable-length bit streams?",
+    "source": "CCSDS",
+    "tags": ["procedure", "acronym"],
+    "relevant": [
+      {"document_id": "CCSDS 732.0-B-5", "revision": "5", "page": 74, "section_prefix": "4.2.3.1", "relevance": 3}
+    ]
+  },
+  {
+    "id": "ecss-review-of-design",
+    "question": "What is the review-of-design verification method?",
+    "source": "ECSS",
+    "tags": ["definition", "verification"],
+    "relevant": [
+      {"document_id": "ECSS-E-ST-10-02C", "revision": "1", "page": 8, "section_prefix": "3.2.2", "relevance": 3}
+    ]
+  },
+  {
+    "id": "ecss-verification-method-list",
+    "question": "Which four verification methods does ECSS-E-ST-10-02C list?",
+    "source": "ECSS",
+    "tags": ["exact-id", "list"],
+    "relevant": [
+      {"document_id": "ECSS-E-ST-10-02C", "revision": "1", "page": 12, "section_prefix": "4.2.2", "relevance": 3}
+    ]
+  },
+  {
+    "id": "ecss-analysis-tools",
+    "question": "How are software tools controlled when verification is performed by analysis?",
+    "source": "ECSS",
+    "tags": ["requirement", "verification"],
+    "relevant": [
+      {"document_id": "ECSS-E-ST-10-02C", "revision": "1", "page": 20, "section_prefix": "5.2.6.5", "relevance": 3}
+    ]
+  },
+  {
+    "id": "ecss-completed-vcd",
+    "question": "What must the completed VCD conform to?",
+    "source": "ECSS",
+    "tags": ["requirement", "acronym"],
+    "relevant": [
+      {"document_id": "ECSS-E-ST-10-02C", "revision": "1", "page": 26, "section_prefix": "5.4.4.1", "relevance": 3}
+    ]
+  },
+  {
+    "id": "ecss-internal-interface",
+    "question": "How does ECSS-E-ST-10-24C define an internal interface?",
+    "source": "ECSS",
+    "tags": ["definition", "interface"],
+    "relevant": [
+      {"document_id": "ECSS-E-ST-10-24C", "revision": "1", "page": 10, "section_prefix": "3.2.9", "relevance": 3}
+    ]
+  },
+  {
+    "id": "ecss-interface-requirement-process",
+    "question": "Which engineering process establishes interface requirements?",
+    "source": "ECSS",
+    "tags": ["process", "interface"],
+    "relevant": [
+      {"document_id": "ECSS-E-ST-10-24C", "revision": "1", "page": 15, "section_prefix": "4.2.4", "relevance": 3}
+    ]
+  },
+  {
+    "id": "ecss-icd-modifications",
+    "question": "Under ECSS-E-ST-10-24C, how must modifications to an interface control document be managed?",
+    "source": "ECSS",
+    "tags": ["requirement", "interface"],
+    "relevant": [
+      {"document_id": "ECSS-E-ST-10-24C", "revision": "1", "page": 27, "section_prefix": "5.5", "relevance": 3}
+    ]
+  },
+  {
+    "id": "ecss-idd-purpose",
+    "question": "What purpose and content must an IDD describe?",
+    "source": "ECSS",
+    "tags": ["annex", "document"],
+    "relevant": [
+      {"document_id": "ECSS-E-ST-10-24C", "revision": "1", "page": 48, "section_prefix": null, "relevance": 3}
+    ]
+  },
+  {
+    "id": "ecss-requirement-traceability",
+    "question": "What forward and backward requirement traceability must system engineering maintain?",
+    "source": "ECSS",
+    "tags": ["requirement", "traceability"],
+    "relevant": [
+      {"document_id": "ECSS-E-ST-10C", "revision": "1", "page": 25, "section_prefix": "5.2.2", "relevance": 3}
+    ]
+  },
+  {
+    "id": "ecss-system-design",
+    "question": "From which inputs must the system engineering function establish the system design?",
+    "source": "ECSS",
+    "tags": ["requirement", "design"],
+    "relevant": [
+      {"document_id": "ECSS-E-ST-10C", "revision": "1", "page": 31, "section_prefix": "5.4.1.1", "relevance": 3}
+    ]
+  },
+  {
+    "id": "ecss-interface-control",
+    "question": "Which ECSS standard controls external and internal interfaces?",
+    "source": "ECSS",
+    "tags": ["reference", "interface"],
+    "relevant": [
+      {"document_id": "ECSS-E-ST-10C", "revision": "1", "page": 35, "section_prefix": "5.6.4", "relevance": 3}
+    ]
+  },
+  {
+    "id": "ecss-unreachable-code",
+    "question": "How does ECSS-E-ST-40C define unreachable code?",
+    "source": "ECSS",
+    "tags": ["exact-id", "definition"],
+    "relevant": [
+      {"document_id": "ECSS-E-ST-40C", "revision": "1", "page": 19, "section_prefix": "3.2.46", "relevance": 3}
+    ]
+  },
+  {
+    "id": "ecss-software-validation-input",
+    "question": "What system input must be specified for software validation?",
+    "source": "ECSS",
+    "tags": ["requirement", "validation"],
+    "relevant": [
+      {"document_id": "ECSS-E-ST-40C", "revision": "1", "page": 38, "section_prefix": "5.2.3.2", "relevance": 3}
+    ]
+  },
+  {
+    "id": "ecss-software-operational-testing",
+    "question": "Which procedures must be established for operational software testing?",
+    "source": "ECSS",
+    "tags": ["requirement", "testing"],
+    "relevant": [
+      {"document_id": "ECSS-E-ST-40C", "revision": "1", "page": 80, "section_prefix": "5.9.2.1", "relevance": 3}
+    ]
+  },
+  {
+    "id": "ecss-spa-definition",
+    "question": "What does software product assurance mean?",
+    "source": "ECSS",
+    "tags": ["definition", "assurance"],
+    "relevant": [
+      {"document_id": "ECSS-Q-ST-80C", "revision": "2", "page": 15, "section_prefix": "3.2.28", "relevance": 3}
+      ,{"document_id": "ECSS-Q-ST-80C", "revision": "2", "page": 22, "section_prefix": "5.2", "relevance": 2}
+    ]
+  },
+  {
+    "id": "ecss-software-alerts",
+    "question": "Which ECSS clause applies to software alerts?",
+    "source": "ECSS",
+    "tags": ["reference", "assurance"],
+    "relevant": [
+      {"document_id": "ECSS-Q-ST-80C", "revision": "2", "page": 28, "section_prefix": "5.2.4", "relevance": 3}
+    ]
+  },
+  {
+    "id": "ecss-spa-plan-output",
+    "question": "What is the expected SPAP output of the software product assurance process?",
+    "source": "ECSS",
+    "tags": ["requirement", "document"],
+    "relevant": [
+      {"document_id": "ECSS-Q-ST-80C", "revision": "2", "page": 50, "section_prefix": "6.2.5", "relevance": 3}
+    ]
+  },
+  {
+    "id": "negative-ccsds-nutrition",
+    "question": "What astronaut nutrition requirements are specified?",
+    "source": "CCSDS",
+    "tags": ["no-answer", "negative"],
+    "relevant": []
+  },
+  {
+    "id": "negative-ccsds-rover-wheels",
+    "question": "How should lunar rover wheels be designed?",
+    "source": "CCSDS",
+    "tags": ["no-answer", "negative"],
+    "relevant": []
+  },
+  {
+    "id": "negative-ccsds-cabin-oxygen",
+    "question": "What cabin oxygen limits apply to a human-rated spacecraft?",
+    "source": "CCSDS",
+    "tags": ["no-answer", "negative"],
+    "relevant": []
+  },
+  {
+    "id": "negative-ecss-tank-welding",
+    "question": "Which welding procedure applies to a launch vehicle propellant tank?",
+    "source": "ECSS",
+    "tags": ["no-answer", "negative"],
+    "relevant": []
+  },
+  {
+    "id": "negative-ecss-solar-cells",
+    "question": "What radiation hardness test applies to photovoltaic solar cells?",
+    "source": "ECSS",
+    "tags": ["no-answer", "negative"],
+    "relevant": []
+  }
+]
