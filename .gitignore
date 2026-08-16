@@ -1,0 +1,23 @@
+.DS_Store
+.env
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# Authorised source material and all derived artefacts must stay local.
+data/
+corpus/
+*.db
+*.db-shm
+*.db-wal
+*.pdf
+*.doc
+*.docx
+*.zip
+manifest.local.json
