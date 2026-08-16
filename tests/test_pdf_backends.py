@@ -8,6 +8,8 @@ from tests.pdf_factory import write_text_pdf
 
 @pytest.mark.parametrize("backend", ["pypdf", "pdf-inspector"])
 def test_pdf_backend_preserves_pages_and_numbered_sections(tmp_path: Path, backend: str) -> None:
+    if backend == "pdf-inspector":
+        pytest.importorskip("pdf_inspector")
     source = tmp_path / "standard.pdf"
     write_text_pdf(
         source,

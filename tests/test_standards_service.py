@@ -310,6 +310,68 @@ def test_opening_an_earlier_index_migrates_search_metadata_without_data_loss(
     assert [(hit.document_id, hit.page) for hit in hits] == [("CCSDS 999.0-B-1", 4)]
 
 
+def test_schema_mismatch_rebuilds_existing_passages_into_fts(tmp_path: Path) -> None:
+    corpus = tmp_path / "corpus"
+    corpus.mkdir()
+    source = corpus / "standard.pdf"
+    write_text_pdf(source, [["2.1 Migration", "The schema migration shall remain searchable."]])
+    database = tmp_path / "index.db"
+    service = StandardsService(database, corpus)
+    service.ingest(
+        IngestRequest(
+            source="CCSDS",
+            document_id="CCSDS 999.0-B-1",
+            title="Migration Standard",
+            revision="1",
+            status="active",
+            official_url="https://ccsds.org/example.pdf",
+            path=source,
+        )
+    )
+    with sqlite3.connect(database) as connection:
+        connection.executescript(
+            """
+            DROP TRIGGER passages_insert;
+            DROP TRIGGER passages_delete;
+            DROP TRIGGER passages_update;
+            DROP TABLE passages_fts;
+            CREATE VIRTUAL TABLE passages_fts USING fts5(
+                section, content, content='passages', content_rowid='rowid'
+            );
+            """
+        )
+
+    reopened = StandardsService(database, corpus)
+
+    assert reopened.search("schema migration searchable")[0].page == 1
+
+
+def test_service_connection_context_closes_the_database(tmp_path: Path) -> None:
+    corpus = tmp_path / "corpus"
+    corpus.mkdir()
+    service = StandardsService(tmp_path / "index.db", corpus)
+
+    with service._connect() as connection:
+        assert connection.execute("SELECT 1").fetchone()[0] == 1
+
+    with pytest.raises(sqlite3.ProgrammingError, match="closed"):
+        connection.execute("SELECT 1")
+
+
+def test_lookup_columns_have_supporting_indexes(tmp_path: Path) -> None:
+    corpus = tmp_path / "corpus"
+    corpus.mkdir()
+    database = tmp_path / "index.db"
+    StandardsService(database, corpus)
+
+    with sqlite3.connect(database) as connection:
+        passage_indexes = {row[1] for row in connection.execute("PRAGMA index_list(passages)")}
+        document_indexes = {row[1] for row in connection.execute("PRAGMA index_list(documents)")}
+
+    assert "passages_document_key_idx" in passage_indexes
+    assert "documents_document_id_idx" in document_indexes
+
+
 def test_reingesting_unchanged_document_is_idempotent(tmp_path: Path) -> None:
     corpus = tmp_path / "corpus"
     corpus.mkdir()

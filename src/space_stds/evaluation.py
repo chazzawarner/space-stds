@@ -164,6 +164,8 @@ def _parse_case(value: object, index: int) -> BenchmarkCase:
         raise ValueError(f"Benchmark case {index} relevant must be a list")
     if not relevant and "no-answer" not in case["tags"]:
         raise ValueError(f"Benchmark case {index} needs relevant passages unless tagged no-answer")
+    if relevant and "no-answer" in case["tags"]:
+        raise ValueError(f"Benchmark case {index} cannot have relevant passages and no-answer")
     return BenchmarkCase(
         case_id=_nonempty_string(case["id"], f"Benchmark case {index} id"),
         question=_nonempty_string(case["question"], f"Benchmark case {index} question"),
@@ -183,11 +185,11 @@ def _parse_relevant(value: object, case_index: int) -> RelevantPassage:
             f"Benchmark case {case_index} relevant passage must contain exactly: "
             f"{', '.join(sorted(required))}"
         )
-    if not isinstance(item["page"], int) or item["page"] < 1:
+    if isinstance(item["page"], bool) or not isinstance(item["page"], int) or item["page"] < 1:
         raise ValueError(f"Benchmark case {case_index} relevant page must be positive")
     if item["section_prefix"] is not None and not isinstance(item["section_prefix"], str):
         raise ValueError(f"Benchmark case {case_index} section_prefix must be a string or null")
-    if item["relevance"] not in {1, 2, 3}:
+    if isinstance(item["relevance"], bool) or item["relevance"] not in {1, 2, 3}:
         raise ValueError(f"Benchmark case {case_index} relevance must be 1, 2, or 3")
     return RelevantPassage(
         document_id=_nonempty_string(

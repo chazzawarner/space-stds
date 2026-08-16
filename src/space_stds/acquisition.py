@@ -376,19 +376,27 @@ def _hash_file(path: Path) -> str:
     return digest.hexdigest()
 
 
-def _first_link(fragment: str) -> str | None:
+def _first_link(fragment: object) -> str | None:
+    fragment = _catalogue_cell(fragment)
     parser = _LinkParser()
     parser.feed(html.unescape(fragment))
     return parser.links[0][0] if parser.links else None
 
 
-def _plain_text(fragment: str) -> str:
+def _plain_text(fragment: object) -> str:
+    fragment = _catalogue_cell(fragment)
     parser = _LinkParser()
     parser.feed(html.unescape(fragment))
     linked_text = " ".join(text for _, text in parser.links if text)
     if linked_text:
         return linked_text.strip()
     return html.unescape(fragment).strip()
+
+
+def _catalogue_cell(value: object) -> str:
+    if value is None:
+        return ""
+    return value if isinstance(value, str) else str(value)
 
 
 def _is_allowed_download(url: str, host: str, suffix: str) -> bool:

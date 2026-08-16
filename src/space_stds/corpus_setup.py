@@ -4,6 +4,7 @@ import hashlib
 import json
 import os
 import re
+import tempfile
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, cast
@@ -89,14 +90,24 @@ def prepare_acquired_corpus(
     if inferred:
         generated["metadata_review_required"] = True
     output_manifest.parent.mkdir(parents=True, exist_ok=True)
-    partial = output_manifest.with_name(f"{output_manifest.name}.part")
+    partial: Path | None = None
     try:
-        partial.write_text(json.dumps(generated, indent=2) + "\n")
+        with tempfile.NamedTemporaryFile(
+            mode="w",
+            encoding="utf-8",
+            dir=output_manifest.parent,
+            prefix=f".{output_manifest.name}.",
+            suffix=".part",
+            delete=False,
+        ) as temporary:
+            partial = Path(temporary.name)
+            temporary.write(json.dumps(generated, indent=2) + "\n")
         if not inferred:
             load_manifest(partial, corpus_root)
         os.replace(partial, output_manifest)
     finally:
-        partial.unlink(missing_ok=True)
+        if partial is not None:
+            partial.unlink(missing_ok=True)
     return PreparationOutcome(len(documents), inferred, output_manifest, not inferred)
 
 

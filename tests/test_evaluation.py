@@ -1,5 +1,17 @@
+import json
+from pathlib import Path
+from typing import Any
+
+import pytest
+
 from space_stds.domain import SearchHit
-from space_stds.evaluation import BenchmarkCase, RelevantPassage, evaluate_case, summarise
+from space_stds.evaluation import (
+    BenchmarkCase,
+    RelevantPassage,
+    evaluate_case,
+    load_cases,
+    summarise,
+)
 
 
 def _hit(document_id: str, page: int, section: str = "4.1 Scope") -> SearchHit:
@@ -103,3 +115,42 @@ def test_benchmark_scores_a_no_answer_case_separately() -> None:
     assert summary.positive_cases == 0
     assert summary.negative_cases == 1
     assert summary.no_answer_accuracy == 1.0
+
+
+def test_benchmark_rejects_relevant_passages_on_a_no_answer_case(tmp_path: Path) -> None:
+    case = _raw_case()
+    case["tags"] = ["no-answer"]
+    path = tmp_path / "cases.json"
+    path.write_text(json.dumps([case]))
+
+    with pytest.raises(ValueError, match="cannot have relevant passages and no-answer"):
+        load_cases(path)
+
+
+@pytest.mark.parametrize("field", ["page", "relevance"])
+def test_benchmark_rejects_booleans_for_numeric_fields(tmp_path: Path, field: str) -> None:
+    case = _raw_case()
+    case["relevant"][0][field] = True
+    path = tmp_path / "cases.json"
+    path.write_text(json.dumps([case]))
+
+    with pytest.raises(ValueError, match=field):
+        load_cases(path)
+
+
+def _raw_case() -> dict[str, Any]:
+    return {
+        "id": "valid-case",
+        "question": "Which passage applies?",
+        "source": "CCSDS",
+        "tags": ["requirement"],
+        "relevant": [
+            {
+                "document_id": "CCSDS A",
+                "revision": "1",
+                "page": 1,
+                "section_prefix": "4.1",
+                "relevance": 3,
+            }
+        ],
+    }

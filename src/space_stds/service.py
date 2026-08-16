@@ -6,6 +6,8 @@ import os
 import re
 import sqlite3
 import tempfile
+from collections.abc import Iterator
+from contextlib import contextmanager
 from dataclasses import asdict, dataclass
 from datetime import UTC, datetime
 from pathlib import Path
@@ -194,8 +196,8 @@ class StandardsService:
             outcomes = [staged_service.ingest(request) for request in requests]
             replacement_path = Path(stage_directory) / "replacement.sqlite3"
             with (
-                sqlite3.connect(staged_path) as source_connection,
-                sqlite3.connect(replacement_path) as replacement_connection,
+                _managed_connection(staged_path) as source_connection,
+                _managed_connection(replacement_path) as replacement_connection,
             ):
                 source_connection.backup(replacement_connection)
                 integrity = replacement_connection.execute("PRAGMA integrity_check").fetchone()
@@ -401,12 +403,17 @@ class StandardsService:
                 f"official_url for {request.source} must use HTTPS on one of: {hosts}"
             )
 
-    def _connect(self) -> sqlite3.Connection:
+    @contextmanager
+    def _connect(self) -> Iterator[sqlite3.Connection]:
         connection = sqlite3.connect(self.database_path)
-        connection.row_factory = sqlite3.Row
-        connection.execute("PRAGMA foreign_keys = ON")
-        connection.execute("PRAGMA busy_timeout = 5000")
-        return connection
+        try:
+            connection.row_factory = sqlite3.Row
+            connection.execute("PRAGMA foreign_keys = ON")
+            connection.execute("PRAGMA busy_timeout = 5000")
+            with connection:
+                yield connection
+        finally:
+            connection.close()
 
     def _replace_database(self, replacement_path: Path) -> None:
         with self._connect() as connection:
@@ -447,6 +454,10 @@ class StandardsService:
                     section TEXT,
                     content TEXT NOT NULL
                 );
+                CREATE INDEX IF NOT EXISTS passages_document_key_idx
+                    ON passages(document_key);
+                CREATE INDEX IF NOT EXISTS documents_document_id_idx
+                    ON documents(document_id COLLATE NOCASE);
                 """
             )
             _ensure_search_schema(connection)
@@ -561,7 +572,8 @@ def _ensure_search_schema(connection: sqlite3.Connection) -> None:
         row[1] for row in connection.execute("PRAGMA table_info(passages_fts)").fetchall()
     ]
     expected = ["document_id", "document_title", "section", "content"]
-    if fts_columns and fts_columns != expected:
+    recreated = bool(fts_columns) and fts_columns != expected
+    if recreated:
         connection.executescript(
             """
             DROP TRIGGER IF EXISTS passages_insert;
@@ -612,8 +624,18 @@ def _ensure_search_schema(connection: sqlite3.Connection) -> None:
         END;
         """
     )
-    if migrated or not fts_columns:
+    if migrated or recreated or not fts_columns:
         connection.execute("INSERT INTO passages_fts(passages_fts) VALUES ('rebuild')")
+
+
+@contextmanager
+def _managed_connection(path: Path) -> Iterator[sqlite3.Connection]:
+    connection = sqlite3.connect(path)
+    try:
+        with connection:
+            yield connection
+    finally:
+        connection.close()
 
 
 def _sha256_file(path: Path) -> str:

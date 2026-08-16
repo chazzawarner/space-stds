@@ -58,6 +58,10 @@ def load_manifest(path: Path, corpus_root: Path) -> tuple[list[IngestRequest], s
         relative_file = Path(item["file"])
         if relative_file.is_absolute():
             raise InvalidSourceError(f"Manifest document {index} file must be relative")
+        if ".." in relative_file.parts:
+            raise InvalidSourceError(
+                f"Manifest document {index} file must not contain parent-directory segments"
+            )
         identity = (
             item["source"],
             item["document_id"].strip().upper(),
